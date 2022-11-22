@@ -2,18 +2,7 @@
 import React, {useEffect} from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
-let map;
-useEffect(()=>{
 
-}, [])
-function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -34.397, lng: 150.644},
-    zoom: 8
-  })
-}
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHHUOIYMLjlo-tNn5Ok5_mpDNRhN88KQw&callback=initMap"
-async defer></script>
 const NavBar = () => {
   return (
     <nav>
