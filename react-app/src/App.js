@@ -43,7 +43,7 @@ function App() {
         </ProtectedRoute>
         <Route path='/' exact={true} >
           <h1>My Home Page</h1>
-          <MapContainer />
+          {/* <MapContainer /> */}
         </Route>
       </Switch>
     </BrowserRouter>

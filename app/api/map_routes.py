@@ -8,3 +8,6 @@ map_routes = Blueprint('maps', __name__)
 def getMapKey():
   googleMapsAPIKey = os.environ.get('MAP_KEY')
   return {'googleMapsAPIKey':googleMapsAPIKey}
+
+# @map_routes.route('/location', methods=['POST'])
+# def getLocation():
