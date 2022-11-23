@@ -22,7 +22,6 @@ class Booking(db.Model):
     end_date = db.Column(db.DateTime, nullable=False)
     createdAt = db.Column(db.DateTime, default=datetime.datetime.now)
     updatedAt = db.Column(db.DateTime, default=datetime.datetime.now, onupdate=datetime.datetime.now)
-
     userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     spotId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('spots.id')), nullable=False)
 

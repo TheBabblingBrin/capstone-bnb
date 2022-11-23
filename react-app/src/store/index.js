@@ -3,10 +3,12 @@ import thunk from 'redux-thunk';
 import session from './session'
 import maps from './maps'
 import spots from './spots'
+import bookings from './bookings'
 const rootReducer = combineReducers({
   session,
   maps,
-  spots
+  spots,
+  bookings
 });
 
 

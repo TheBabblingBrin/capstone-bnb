@@ -71,6 +71,7 @@ def update_spot(spotId):
   return {'errors': validation_errors_to_error_messages(form.errors)}
 
 @spot_routes.route('/<int:spotId>', methods=['DELETE'])
+@login_required
 def delete_spot(spotId):
     """
     Delete a spot

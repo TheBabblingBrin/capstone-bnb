@@ -51,6 +51,9 @@ def upgrade():
     sa.ForeignKeyConstraint(['ownerId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
     op.create_table('bookings',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('start_date', sa.DateTime(), nullable=False),
@@ -63,6 +66,8 @@ def upgrade():
     sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
     op.create_table('spotimages',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('url', sa.String(length=500), nullable=True),
@@ -70,6 +75,8 @@ def upgrade():
     sa.ForeignKeyConstraint(['spotId'], ['spots.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
     # ### end Alembic commands ###
 
 
