@@ -13,13 +13,14 @@ const SingleSpot = () =>{
   const history = useHistory()
   const spot = useSelector(state => state.spots.currentSpot.spot)
   const {spotId} = useParams()
+  const spots = useSelector(state => state.spots.allSpots[spotId])
 
   useEffect(()=>{
   dispatch(getSpotThunk(spotId))
-  },[])
+  },[spots])
 
   const deleteSpot = async () =>{
-    let confirm = await dispatch(removeSpotThunk(spot.id))
+    let confirm = dispatch(removeSpotThunk(spot.id))
     if(confirm){
       history.push('/')
     }

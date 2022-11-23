@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { addSpotThunk, updateSpotThunk } from '../../../store/spots';
+import { addSpotThunk, updateSpotThunk, loadSpotsThunk } from '../../../store/spots';
 import ErrorDisplay from '../../auth/ErrorDisplay'
 
 const SpotForm = ({update = false}) => {
@@ -29,7 +29,8 @@ const SpotForm = ({update = false}) => {
 
 
   useEffect(()=>{
-  }, [dispatch, user])
+    dispatch(loadSpotsThunk())
+  }, [dispatch])
 
 
   const handleSubmit = async (e) => {
@@ -52,7 +53,8 @@ const SpotForm = ({update = false}) => {
     }
     if(newspot){
       console.log('NEWSTUFF',newspot)
-      history.push(`/spots/${newspot.id}`)
+      dispatch(loadSpotsThunk())
+      history.push(`/spots/${newspot.spot.id}`)
       // setShowModal(false)
     }
   }

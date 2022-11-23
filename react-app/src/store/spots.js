@@ -74,7 +74,7 @@ export const addSpotThunk = (spot) => async (dispatch) =>{
   console.log('RESPONSE', response)
   if(response.ok){
     const data = await response.json();
-    dispatch(addSpot(data))
+    await dispatch(addSpot(data))
     return data;
   }else if (response.status < 500) {
     const data = await response.json();

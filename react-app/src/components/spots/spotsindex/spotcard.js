@@ -10,23 +10,24 @@ import { getSpotThunk, updateSpotThunk } from '../../../store/spots';
 const SpotCard = ({spot}) =>{
   const dispatch = useDispatch()
   const history = useHistory()
-  // const spot = useSelector(state => Object.values(state.spots.allSpots))
+  const spots = useSelector(state => state.spots.allSpots)
 
   useEffect(()=>{
-  },[])
+
+  },[spots, dispatch])
+  
   const getSpot =async ()=>{
-    await getSpotThunk(spot.id)
+    await dispatch(getSpotThunk(spot.id))
     history.push(`/spots/${spot.id}`)
   }
-  const spotInfo = Object.values(spot)
   if(!spot) return <h1>Loading...</h1>
 
   return(
     <div>
     <div className='single-spot-wrapper'>
-      <ul>
-        {spotInfo.map(prop => <li>{prop}</li>)}
-      </ul>
+      <p>
+        {spot.name} {spot.city} {spot.state} {spot.price}
+        </p>
     </div>
     <button
     onClick={() => getSpot()}

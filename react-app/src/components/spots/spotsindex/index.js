@@ -11,7 +11,8 @@ const SpotIndex = () =>{
   const spots = useSelector(state => state.spots.allSpots)
   useEffect(()=>{
     dispatch(loadSpotsThunk())
-  },[])
+  },[dispatch])
+
 
   if(!spots ) return <h1>Loading...</h1>
   const spotList = Object.values(spots)
