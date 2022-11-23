@@ -20,6 +20,9 @@ class SpotImage(db.Model):
 
     spotId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('spots.id')), nullable=False)
 
+    spot = db.relationship('Spot',
+                            back_populates = 'images',
+                            lazy=False)
 
 
     def to_dict(self):

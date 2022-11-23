@@ -9,6 +9,9 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import MapContainer from './components/Maps';
+import SpotIndex from './components/spots/spotsindex';
+import SpotForm from './components/spots/spotform';
+import SingleSpot from './components/spots/singleSpot';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -43,7 +46,12 @@ function App() {
         </ProtectedRoute>
         <Route path='/' exact={true} >
           <h1>My Home Page</h1>
+          <SpotForm />
+          <SpotIndex />
           {/* <MapContainer /> */}
+        </Route>
+        <Route path='/spots/:spotId'>
+          <SingleSpot />
         </Route>
       </Switch>
     </BrowserRouter>

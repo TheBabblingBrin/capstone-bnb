@@ -23,10 +23,16 @@ class Booking(db.Model):
     createdAt = db.Column(db.DateTime, default=datetime.datetime.now)
     updatedAt = db.Column(db.DateTime, default=datetime.datetime.now, onupdate=datetime.datetime.now)
 
-    userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('user.id')), nullable=False)
+    userId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     spotId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('spots.id')), nullable=False)
 
-    
+    spots = db.relationship('Spot',
+                            back_populates = 'bookings',
+                            lazy=False)
+
+    reservations = db.relationship('User',
+                            back_populates = 'bookings',
+                            lazy=False)
 
     def to_dict(self):
         return {

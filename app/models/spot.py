@@ -31,14 +31,19 @@ class Spot(db.Model):
     ownerId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
 
     bookings = db.relationship('Booking',
-                            back_populates = 'bookings',
+                            back_populates = 'spots',
                             lazy=False,
                             cascade="all, delete")
 
     images = db.relationship('SpotImage',
-                            back_populates = 'spotimages',
+                            back_populates = 'spot',
                             lazy=False,
                             cascade="all, delete")
+
+    owners = db.relationship('User',
+                            back_populates= 'listings',
+                            lazy=False)
+
 
 
 

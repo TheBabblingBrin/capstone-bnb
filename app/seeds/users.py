@@ -23,7 +23,7 @@ def seed_users():
     sebas = User(
         username='SebAss', first_name='Sebastian', last_name='Ant',email='sebas@aa.io', password='password')
     will = User(
-        username='WillieN', first_name='William', last_name='Ngo',email='ben@aa.io', password='password')
+        username='WillieN', first_name='William', last_name='Ngo',email='will@aa.io', password='password')
     dion = User(
         username='BigDDion', first_name='Dion', last_name='Pham',email='dion@aa.io', password='password')
     db.session.add_all([dion,frank, kyle, allen, demo, marnie, bobbie, brin, ben, sebas, will])

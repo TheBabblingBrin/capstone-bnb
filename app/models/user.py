@@ -18,12 +18,12 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
     bookings = db.relationship('Booking',
-                            back_populates = 'bookings',
+                            back_populates = 'reservations',
                             lazy=False,
                             cascade="all, delete")
 
     listings = db.relationship('Spot',
-                            back_populates = 'spots',
+                            back_populates = 'owners',
                             lazy=False,
                             cascade="all, delete")
 
