@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 
@@ -31,6 +31,11 @@ const NavBar = () => {
           <LogoutButton />
         </li>
       </ul>
+    <div id="map"></div>
+
+
+
+
     </nav>
   );
 }
