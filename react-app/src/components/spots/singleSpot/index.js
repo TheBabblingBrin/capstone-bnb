@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import { useSelector, useDispatch} from 'react-redux';
 import {  useParams, useHistory} from "react-router-dom";
 import { getSpotThunk, loadSpotsThunk, removeSpotThunk } from '../../../store/spots';
+import BookingForm from '../../bookings/bookingform';
 import SpotForm from '../spotform';
 import SpotCard from '../spotsindex/spotcard';
 
@@ -37,8 +38,10 @@ const SingleSpot = () =>{
           >
             Delete
           </button>
+          <h3>Update Spot</h3>
           <SpotForm update={true}/>
-
+          <h3>Reserve Spot</h3>
+          <BookingForm spotId={spotId}/>
     </div>
   )
 

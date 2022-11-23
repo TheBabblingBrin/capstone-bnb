@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import BookingIndex from './bookings/bookingindex';
 
 function User() {
   const [user, setUser] = useState({});
   const { userId }  = useParams();
+  const currUser = useSelector(state => state.session.user)
 
   useEffect(() => {
     if (!userId) {
@@ -31,6 +34,8 @@ function User() {
       <li>
         <strong>Email</strong> {user.email}
       </li>
+
+        <BookingIndex />
     </ul>
   );
 }

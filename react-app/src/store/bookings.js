@@ -49,12 +49,14 @@ export const loadBookingsThunk = ()=> async (dispatch) => {
 }
 
 export const getBookingThunk = (bookingId) => async (dispatch) => {
+  console.log('GETTING BOOKING', bookingId)
   const response = await fetch(`/api/bookings/${bookingId}`)
 
   if(response.ok){
     const data = await response.json();
-    dispatch(getBooking(data))
-    return data;
+    console.log('GOT IT BOSS', data)
+    dispatch(getBooking(data.booking))
+    return data.booking;
   }else if (response.status < 500) {
     const data = await response.json();
     if (data.errors) {
@@ -66,6 +68,7 @@ export const getBookingThunk = (bookingId) => async (dispatch) => {
 }
 
 export const addBookingThunk = (booking) => async (dispatch) =>{
+  console.log('BOOKING THUNK', booking)
   const response = await fetch('/api/bookings',{
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -73,7 +76,7 @@ export const addBookingThunk = (booking) => async (dispatch) =>{
   })
   if(response.ok){
     const data = await response.json();
-    await dispatch(addBooking(data))
+    await dispatch(addBooking(data.booking))
     return data;
   }else if (response.status < 500) {
     const data = await response.json();
@@ -110,12 +113,12 @@ export const updateBookingThunk = (booking, id) => async (dispatch) =>{
 }
 
 export const removeBookingThunk = (bookingId) => async (dispatch) =>{
-  const response = await fetch(`/api/Bookings/${bookingId}`,{
+  const response = await fetch(`/api/bookings/${bookingId}`,{
     method: "DELETE"
   })
 
   if(response.ok){
-    dispatch(removeBooking(bookingId))
+    await dispatch(removeBooking(bookingId))
     return;
   }else if (response.status < 500) {
     const data = await response.json();
@@ -136,7 +139,7 @@ export default function BookingReducer(state = initialState, action){
       const allBookings = normalizeArray(action.bookings.bookings);
       return {...state, allBookings:{...allBookings}}
     case GET_BOOKING:
-      const currentBooking = {allBookings: {...state.allBookings}, currentBooking:{...action.Booking}}
+      const currentBooking = {allBookings: {...state.allBookings}, currentBooking:{...action.booking}}
       return currentBooking
     case ADD_BOOKING:
         if (!state[action.booking.id]) {
