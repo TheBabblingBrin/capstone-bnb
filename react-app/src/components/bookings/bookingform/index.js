@@ -16,12 +16,12 @@ const formatDate = (date) => {
 
   return [year, month, day].join('-');
 }
-const BookingForm = ({update = false, booking}) => {
+const BookingForm = ({update = false, booking, spotId}) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const currbooking = useSelector(state => state.bookings[booking?.id])
   const user = useSelector(state => state.session.user)
-  const [spot, setSpot] = useState(update? booking.spotId:'')
+  const [spot, setSpot] = useState(update? booking.spotId:spotId)
   const [startDate, setStartDate] = useState(update? formatDate(booking?.start_date):'')
   const [endDate, setEndDate] = useState(update? formatDate(booking?.end_date):'')
   const [errors, setErrors] = useState([]);
