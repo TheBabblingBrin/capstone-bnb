@@ -17,6 +17,7 @@ class SpotImage(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String(500))
+    order = db.Column(db.Integer)
 
     spotId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('spots.id')), nullable=False)
 
@@ -29,6 +30,7 @@ class SpotImage(db.Model):
         return {
             'id': self.id,
             'spotId': self.spotId,
-            'url': self.url
+            'url': self.url,
+            'order': self.order
 
         }
