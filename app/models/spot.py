@@ -42,7 +42,7 @@ class Spot(db.Model):
 
     owners = db.relationship('User',
                             back_populates= 'listings',
-                            lazy=False)
+                            lazy='joined')
 
 
 
@@ -58,6 +58,7 @@ class Spot(db.Model):
             'country': self.country,
             'description': self.description,
             'price': self.price,
+            'images': sorted([image.to_dict() for image in self.images], key=lambda x: x['order']),
             'createdAt': json.dumps(self.createdAt, default=str),
             'updatedAt': json.dumps(self.updatedAt, default=str)
         }
