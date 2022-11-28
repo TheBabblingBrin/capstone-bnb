@@ -32,7 +32,7 @@ const SpotCard = ({spot}) =>{
     <div>
     <div className='single-spot-wrapper'>
       <p>
-        {spot.name} {spot.city} {spot.state} {spot.price}
+        {spot.name} {spot.city} {spot.state} {spot.price} {spot.avg_rating}
         </p>
         {spot.images?.length > 0 && spot.images.map(image =>
         <div className='spot-card-image-container'>

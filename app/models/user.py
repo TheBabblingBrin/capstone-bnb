@@ -23,7 +23,7 @@ class User(db.Model, UserMixin):
                             cascade="all, delete")
 
     reviews = db.relationship('Review',
-                            back_populates = 'review_spot',
+                            back_populates = 'reviewer',
                             lazy=False,
                             cascade="all, delete")
     listings = db.relationship('Spot',

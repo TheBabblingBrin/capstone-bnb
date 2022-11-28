@@ -3,6 +3,8 @@ import { useSelector, useDispatch} from 'react-redux';
 import {  useParams, useHistory} from "react-router-dom";
 import { getSpotThunk, loadSpotsThunk, removeSpotThunk } from '../../../store/spots';
 import BookingForm from '../../bookings/bookingform';
+import ReviewForm from '../../reviews/reviewform';
+import ReviewIndex from '../../reviews/reviewindex';
 import SpotForm from '../spotform';
 import SpotCard from '../spotsindex/spotcard';
 
@@ -42,6 +44,9 @@ const SingleSpot = () =>{
           <SpotForm update={true}/>
           <h3>Reserve Spot</h3>
           <BookingForm spotId={spotId}/>
+          <h3>Leave a Review</h3>
+          <ReviewForm spotId={spotId}/>
+          <ReviewIndex />
     </div>
   )
 

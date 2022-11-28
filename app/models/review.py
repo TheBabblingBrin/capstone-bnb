@@ -24,6 +24,7 @@ class Review(db.Model):
     spotId = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('spots.id')), nullable=False)
     body = db.Column(db.String(500), nullable=False)
     rating = db.Column(db.Integer, nullable=False )
+
     review_spot = db.relationship('Spot',
                             back_populates = 'reviews',
                             lazy=False)
