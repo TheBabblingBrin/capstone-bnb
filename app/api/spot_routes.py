@@ -69,7 +69,6 @@ def update_spot(spotId):
     return{{'errors': 'You must own a spot to update it.'}}
   if form.validate_on_submit():
       data = form.data
-      print('IM UPDATING MYSELF', data)
       spot.name = data['name']
       spot.address = data['address']
       spot.city = data['city']
@@ -79,7 +78,7 @@ def update_spot(spotId):
       spot.price = data['price']
       for i in range(len(images)):
         if len(images[i])>1:
-          if spot.images[i]:
+          if i+1 <= len(spot.images) :
             spot.images[i].url = f'{images[i]}'
           else:
             image = SpotImage(url=f'{images[i]}', spotId=spotId, order=i+1)
