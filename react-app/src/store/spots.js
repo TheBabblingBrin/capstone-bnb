@@ -6,6 +6,7 @@ const GET_SPOT = 'spots/GET_SPOT'
 const ADD_SPOT = 'spots/ADD_SPOT'
 const REMOVE_SPOT = 'spots/REMOVE_SPOT'
 
+
 //ACTIONS
 const loadSpots = (spots) =>({
   type: LOAD_SPOTS,
