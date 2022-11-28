@@ -35,6 +35,11 @@ class Spot(db.Model):
                             lazy=False,
                             cascade="all, delete")
 
+    reviews = db.relationship('Review',
+                            back_populates = 'reviewer',
+                            lazy=False,
+                            cascade="all, delete")
+
     images = db.relationship('SpotImage',
                             back_populates = 'spot',
                             lazy=False,
@@ -58,6 +63,8 @@ class Spot(db.Model):
             'country': self.country,
             'description': self.description,
             'price': self.price,
+            'avg_rating': sum([review.to_dict().rating for review in self.reviews])/len([self.reviews.keys()]),
+            'reviews': sorted([review.to_dict() for review in self.reviews], key=lambda x: x['createdAt']),
             'images': sorted([image.to_dict() for image in self.images], key=lambda x: x['order']),
             'createdAt': json.dumps(self.createdAt, default=str),
             'updatedAt': json.dumps(self.updatedAt, default=str)
