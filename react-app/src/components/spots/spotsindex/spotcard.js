@@ -11,38 +11,67 @@ const SpotCard = ({spot}) =>{
   const dispatch = useDispatch()
   const history = useHistory()
   const spots = useSelector(state => state.spots.allSpots)
+  const [slides , setSlides] = useState([])
+  const slideImage = () => slides.forEach((slide)=>slide.style.transform = `translateX(-${currSlide * 100}%)`)
 
-  const deleteImage =async (id) => {
-    console.log(`deleting`, id)
-    fetch(`/api/images/${id}`,{
-      method: 'DELETE'
-    })
-    dispatch(loadSpotsThunk())
-  }
+  let currSlide = 0
+
   useEffect(()=>{
+    setTimeout(()=>{
+      setSlides(document.querySelectorAll(`.spot-image${spot.id}`))
+    }, 200)
+  },[])
 
-  },[spots, dispatch])
+  const goNext = ()=>{
+    if (currSlide === spot.images?.length -1) return
+    currSlide ++
+    slideImage()
+  }
+
+  const goPrev = ()=>{
+
+    if (currSlide === 0) return
+    currSlide --
+    slideImage()
+  }
 
   const getSpot =async ()=>{
     history.push(`/spots/${spot.id}`)
   }
+
   if(!spot) return <h1>Loading...</h1>
 
   return(
-    <div>
-    <div className='single-spot-wrapper'>
-      <p>
-        {spot.name} {spot.city} {spot.state} {spot.price} {spot.avg_rating}
-        </p>
-        {spot.images?.length > 0 && spot.images.map(image =>
+    <div className='spot-card-wrapper'>
+    <div className='single-slideshow'>
+        {spot.images?.length > 0 && spot.images.map((image,idx) =>
         <div className='spot-card-image-container'>
 
-            <img className='spot-card-image' src={image.url }/>
-            <button onClick={()=> deleteImage(image.id)}>Remove Image</button>
+            <img className={`spot-card-image spot-image${spot.id}`}  src={image.url} style={{left:`${idx *100}%`}}/>
+            {/* <button onClick={()=> deleteImage(image.id)}>Remove Image</button> */}
+
         </div>
             )}
 
     </div>
+    <div className='slideshow-button-wrapper'>
+    {
+
+    <div className='slideshow-button prev'
+    onClick={()=>goPrev()}>
+    <a>&#10094;</a>
+
+    </div>
+    }
+
+
+    <div className='slideshow-button next'
+    onClick={()=>goNext()}>
+    <a>&#10095;</a>
+    </div>
+
+    </div>
+
     <button
     onClick={() => getSpot()}
     >Load Spot</button>

@@ -1,8 +1,77 @@
 .spot-card-image{
-  
-  min-height: 200px;
-  min-width: 200px;
-  max-height: 200px;
-  max-width: 200px;
+  /* position: absolute;
+  top: 0;
+  left:0; */
+  min-height: 296px;
+  min-width: 312px;
+  max-height: 296px;
+  max-width: 312px;
   object-fit: fill;
+  transition-duration:.3s;
+}
+
+.spots-wrapper{
+  position: relative;
+  top: 80px;
+}
+
+.spot-card-wrapper{
+
+  min-height: 396px;
+  min-width: 312px;
+  max-height: 396px;
+  max-width: 312px;
+}
+.single-slideshow{
+  display: flex;
+  position: relative;
+  min-height: 296px;
+  min-width: 312px;
+  max-height: 296px;
+  max-width: 312px;
+  overflow: hidden;
+}
+.spot-card-image-container{
+  /* position: relative; */
+  min-height: 296px;
+  min-width: 312px;
+  max-height: 296px;
+  max-width: 312px;
+}
+
+.slideshow-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: 1px solid transparent;
+  border-radius: 99px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 5px;
+  cursor: pointer;
+  min-height: 30px;
+  min-width: 30px;
+  max-height: 30px;
+  max-width: 30px;
+  margin: 0px 10px;
+  opacity: 0;
+}
+.slideshow-button:hover{
+  opacity: 1 !important;
+  scale: 1.1;
+}
+.slideshow-button a{
+  margin-bottom:2px;
+}
+
+.slideshow-button-wrapper{
+  display:flex;
+  justify-content: space-between;
+  position: relative;
+  top:-165px;
+  min-width: 312px;
+  max-width: 312px;
+}
+
+.spot-card-wrapper:hover .slideshow-button{
+  opacity: .8;
 }
