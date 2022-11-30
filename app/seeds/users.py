@@ -4,28 +4,28 @@ from app.models import db, User, environment, SCHEMA
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', first_name='Demo', last_name='User', email='demo@aa.io', password='password')
+        first_name='Demo', last_name='User', email='demo@aa.io', password='password')
     marnie = User(
-        username='MarnParties', first_name='Marnie', last_name='Party', email='marnie@aa.io', password='password')
+        first_name='Marnie', last_name='Party', email='marnie@aa.io', password='password')
     bobbie = User(
-        username='BobbyB', first_name='Robert', last_name='Bobert',email='bobbie@aa.io', password='password')
+        first_name='Robert', last_name='Bobert',email='bobbie@aa.io', password='password')
 
     frank = User(
-        username='franko', first_name='Frank', last_name='Oscar', email='frank@aa.io', password='password')
+        first_name='Frank', last_name='Oscar', email='frank@aa.io', password='password')
     kyle = User(
-        username='KyleS', first_name='Kyle', last_name='Solano', email='kyle@aa.io', password='password')
+        first_name='Kyle', last_name='Solano', email='kyle@aa.io', password='password')
     allen = User(
-        username='AllenA', first_name='Allen', last_name='Pham',email='allen@aa.io', password='password')
+        first_name='Allen', last_name='Pham',email='allen@aa.io', password='password')
     brin = User(
-        username='BrinH', first_name='Brin', last_name='Hoover',email='brin@aa.io', password='password')
+        first_name='Brin', last_name='Hoover',email='brin@aa.io', password='password')
     ben = User(
-        username='BenTie', first_name='Benjamin', last_name='Thai',email='ben@aa.io', password='password')
+        first_name='Benjamin', last_name='Thai',email='ben@aa.io', password='password')
     sebas = User(
-        username='SebAss', first_name='Sebastian', last_name='Ant',email='sebas@aa.io', password='password')
+        first_name='Sebastian', last_name='Ant',email='sebas@aa.io', password='password')
     will = User(
-        username='WillieN', first_name='William', last_name='Ngo',email='will@aa.io', password='password')
+        first_name='William', last_name='Ngo',email='will@aa.io', password='password')
     dion = User(
-        username='BigDDion', first_name='Dion', last_name='Pham',email='dion@aa.io', password='password')
+        first_name='Dion', last_name='Pham',email='dion@aa.io', password='password')
     db.session.add_all([dion,frank, kyle, allen, demo, marnie, bobbie, brin, ben, sebas, will])
     db.session.commit()
 

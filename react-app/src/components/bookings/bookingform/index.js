@@ -69,7 +69,7 @@ const BookingForm = ({update = false, booking, spot}) => {
   return(
     <div>
     <form className='booking-form' onSubmit={handleSubmit}>
-      <div>
+      <div className='signup-error-list'>
           <ErrorDisplay id={'booking-error-list'} errors={errors}/>
         </div>
         <div className="dates_container">
@@ -96,7 +96,11 @@ const BookingForm = ({update = false, booking, spot}) => {
                   </label>
                 </div>
         </div>
-      <button className='create-booking-submit' type='submit'>{update? 'Update':'Reserve'}</button>
+
+      <div className='booking-button-wrapper'>
+        <button className='create-booking-submit' type='submit'>{update? 'Update':'Reserve'}</button>
+
+      </div>
 
     </form>
     {endDate && startDate &&

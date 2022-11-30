@@ -8,9 +8,7 @@ class User(db.Model, UserMixin):
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
-
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(40), nullable=False, unique=True)
     first_name = db.Column(db.String(200), nullable=False)
     last_name = db.Column(db.String(200), nullable=False)
     profile_pic = db.Column(db.String(500))
@@ -45,7 +43,6 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
-            'username': self.username,
             'firstName': self.first_name,
             'lastName': self.last_name,
             'email': self.email,

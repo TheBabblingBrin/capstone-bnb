@@ -104,7 +104,12 @@
 .award-description{
   color: rgb(113,113,117);
 }
+.spot-page-wrapper{
+  display: flex;
+  justify-content: center;
+  width: 100vw;
 
+}
 .spot-page-container{
   display: flex;
   flex-direction: column;

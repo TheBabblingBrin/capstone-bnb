@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from "react-redux";
 import {login} from '../../../../store/session'
+import ErrorDisplay from '../../ErrorDisplay'
+
 import './LoginForm.css'
 function LoginForm() {
   const dispatch = useDispatch();
@@ -9,7 +11,13 @@ function LoginForm() {
   const [errors, setErrors] = useState([]);
 
 useEffect(()=>{
-
+const menu = document.querySelector('.user-menu')
+const profile = document.querySelector('.profile-dropdown-button')
+menu.style.visibility = 'hidden'
+return () => {
+  profile.click()
+  menu.style.visibility = 'unset'
+}
 },[])
 
   const handleSubmit = async (e) => {
@@ -17,8 +25,10 @@ useEffect(()=>{
     e.preventDefault();
     setErrors([]);
 
-   dispatch(login( credential, password ))
-
+   const user = await dispatch(login( credential, password ))
+   if (user) {
+    setErrors(user)
+  }
   };
 
   return (
@@ -26,20 +36,33 @@ useEffect(()=>{
 
 
     <form onSubmit={handleSubmit}>
+    {errors.length > 0 &&
+      <div className='signup-error-list'>
+        <ErrorDisplay id={'signup-error-list'} errors={errors}/>
+      </div>}
+    <div className='login-form-fields'>
+
         <input
+          className='login-input first-field'
+          id='login-email'
           type="text"
           value={credential}
-          placeholder="Username or Email"
+          placeholder="Email"
           onChange={(e) => setCredential(e.target.value)}
         />
         <input
+          className='login-input last-field'
+          id='login-password'
           type="password"
           value={password}
           placeholder="Password"
 
           onChange={(e) => setPassword(e.target.value)}
         />
-      <button type="submit" className="login-button">Log In</button>
+        </div>
+        <div className='login-button-wrapper'>
+          <button type="submit" className="login-button">Log In</button>
+        </div>
     </form>
     </div>
   );

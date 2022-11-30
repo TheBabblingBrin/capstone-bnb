@@ -32,7 +32,7 @@ function UserDropdownButton() {
           </div>
         </button>
       {showMenu &&(
-        <UserMenu />
+        <UserMenu setShowMenu={setShowMenu}/>
       )
       }
     </div>

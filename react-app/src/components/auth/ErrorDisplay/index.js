@@ -15,12 +15,20 @@ function ErrorDisplay({errors, id}) {
   for(let field of splashInputs){
 
     if(field.id === 'sign-up-email'){
-      (errors.includes('email : Please enter an email')||errors.includes('email : Please enter a valid e-mail address.'))?
+      (errors.includes('email : Please enter an email')||errors.includes('email : Please enter a valid e-mail address.')||
+      errors.includes('email : Email address is already in use.')||errors.includes('email : Please enter an e-mail under 255 characters.'))?
       field.classList.add('error-border'):field.classList.remove('error-border')
     }
 
-    if(field.id === 'sign-up-username'){
-      (errors.includes('username : Please enter a username'))?
+    if(field.id === 'sign-up-firstName'){
+      (errors.includes('firstName : This field is required.')
+      ||errors.includes('firstName : Please enter a first name under 200 characters.'))?
+      field.classList.add('error-border'):field.classList.remove('error-border')
+    }
+
+    if(field.id === 'sign-up-lastName'){
+      (errors.includes('lastName : This field is required.')
+      ||errors.includes('lastName : Please enter a last name under 200 characters.'))?
       field.classList.add('error-border'):field.classList.remove('error-border')
     }
 
@@ -30,7 +38,8 @@ function ErrorDisplay({errors, id}) {
     }
 
     if(field.id === 'sign-up-password'){
-      (errors.includes('password : This field is required.'))?
+      (errors.includes('password : This field is required.')
+      ||errors.includes('password : Please enter a password under 60 characters.'))?
       field.classList.add('error-border'):field.classList.remove('error-border')
     }
 
@@ -59,8 +68,8 @@ function ErrorDisplay({errors, id}) {
         let formPH = form.placeholder
             // form.style.border = noErrorBorder
 
-            if(formPH === 'Server Name'){
-              (errors.includes('name : Please enter a server name')
+            if(formPH === 'Email'){
+              (errors.includes('email : This field is required.')
               |errors.includes('name : Server name is already in use.'))?
               form.classList.add('error-border'):form.classList.remove('error-border')
             }

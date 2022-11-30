@@ -40,6 +40,9 @@ const SingleSpot = () =>{
    else spotRating = parseFloat(spot.avg_rating).toFixed(1);
 
   return(
+    <div className='spot-page-wrapper'>
+
+
     <div className='spot-page-container'>
         <div className='single-spot-header'>
           <h1 className='single-spot-title'>{spot.name}</h1>
@@ -125,6 +128,7 @@ const SingleSpot = () =>{
           {/* <h3>Leave a Review</h3>
           <ReviewForm spotId={spotId}/> */}
           <ReviewIndex spot={spot} spotrating={spotRating} />
+    </div>
     </div>
   )
 

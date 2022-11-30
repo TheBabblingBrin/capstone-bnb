@@ -1,6 +1,7 @@
 .nav-bar{
+  background-color: white;
   box-sizing: border-box;
-  position: absolute;
+  position: sticky;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,7 +11,7 @@
   min-height: 80px;
   max-height: 80px;
   border-bottom: 1px solid rgba(211, 211, 211, .6);
-
+  z-index: 2;
 }
 
 .logo-button-container{
