@@ -1,4 +1,5 @@
 import { useHistory } from 'react-router-dom';
+import UserDropdownButton from '../../auth/User/userDropDown/UserDropdownButton';
 import '../index.css'
 const NavBar = () =>{
   const history = useHistory()
@@ -16,15 +17,7 @@ return(
     </div>
     <div className='nav-center'></div>
     <div className='nav-right'>
-      <div className='profile-button-container'>
-        <button
-        className='profile-dropdown-button'
-        ><i class="fa-sharp fa-solid fa-bars"></i>
-        <div className='user-logo'>
-        <img src='https://res.cloudinary.com/degkakjou/image/upload/v1669680635/AirBnB/user_pic-50x50_napyep.png'></img>
-        </div>
-        </button>
-      </div>
+        <UserDropdownButton />
     </div>
   </div>
 )
