@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import ErrorDisplay from '../../auth/ErrorDisplay'
 import {loadBookingsThunk, updateBookingThunk, addBookingThunk} from '../../../store/bookings'
+import './index.css'
 const formatDate = (date) => {
-  var d = new Date(date),
+  let d = new Date(date),
       month = '' + (d.getMonth() + 1),
       day = '' + (d.getDate() +1) ,
       year = d.getFullYear();
@@ -16,31 +17,38 @@ const formatDate = (date) => {
 
   return [year, month, day].join('-');
 }
-const BookingForm = ({update = false, booking, spotId}) => {
+const BookingForm = ({update = false, booking, spot}) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const currbooking = useSelector(state => state.bookings[booking?.id])
   const user = useSelector(state => state.session.user)
-  const [spot, setSpot] = useState(update? booking.spotId:spotId)
   const [startDate, setStartDate] = useState(update? formatDate(booking?.start_date):'')
   const [endDate, setEndDate] = useState(update? formatDate(booking?.end_date):'')
   const [errors, setErrors] = useState([]);
+  const [showPrice, setShowPrice] = useState(false);
+  const [nights, setNights] = useState()
 
-  const updateStartDate = (e) => setStartDate(e.target.value);
-  const updateEndDate = (e) => setEndDate(e.target.value);
 
+  const updateStartDate = (e) => {
+    setStartDate(e.target.value)
+
+  };
+  const updateEndDate = (e) => {
+    setEndDate(e.target.value)
+
+  };
   useEffect(()=>{
     dispatch(loadBookingsThunk())
+    setNights((new Date(endDate)-new Date(startDate))/ (1000 * 3600 * 24))
+  }, [dispatch, startDate,endDate])
 
-
-  }, [dispatch])
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const payload = {
-      spotId:spot,
+      spotId:spot.id,
       start_date: startDate,
       end_date: endDate
 
@@ -59,31 +67,62 @@ const BookingForm = ({update = false, booking, spotId}) => {
 
 
   return(
+    <div>
     <form className='booking-form' onSubmit={handleSubmit}>
       <div>
           <ErrorDisplay id={'booking-error-list'} errors={errors}/>
         </div>
-        <label>
-            CHECK-IN
-        <input
-          type="date"
-          required
-          value={startDate}
-          onChange={updateStartDate}
-        />
-        </label>
-        <label>
-          CHECK-OUT
-       <input
-          type="date"
-          required
-          value={endDate}
-          onChange={updateEndDate}
-        />
-        </label>
+        <div className="dates_container">
+                <div className="date_input_containers">
+                  <label>
+                      CHECK-IN
+                  <input
+                    type="date"
+                    required
+                    value={startDate}
+                    onChange={updateStartDate}
+                  />
+                  </label>
+                </div>
+                <div className="date_input_containers">
+                  <label>
+                    CHECK-OUT
+                  <input
+                    type="date"
+                    required
+                    value={endDate}
+                    onChange={updateEndDate}
+                  />
+                  </label>
+                </div>
+        </div>
       <button className='create-booking-submit' type='submit'>{update? 'Update':'Reserve'}</button>
 
     </form>
+    {endDate && startDate &&
+
+    <div className='cart-bottom'>
+        <div className='cart-calc'>
+          <div>
+            <span>${spot.price}x{nights}</span>
+            <span>${spot.price * nights}</span>
+          </div>
+          <div>
+            <span>Cleaning fee</span>
+            <span>${parseInt(spot.price/nights)}</span>
+          </div>
+          <div>
+            <span>Service fee</span>
+            <span>${parseInt((spot.price * nights)*.14)}</span>
+          </div>
+        </div>
+        <div className='cart-total'>
+          <span>Total before taxes</span>
+          <span>${parseInt((spot.price * nights)*.14) + spot.price * nights + parseInt(spot.price/nights)}</span>
+        </div>
+      </div>
+    }
+    </div>
   )
 }
 

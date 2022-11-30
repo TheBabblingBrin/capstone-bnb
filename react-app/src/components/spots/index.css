@@ -1,28 +1,43 @@
 .spot-card-image{
-  /* position: absolute;
-  top: 0;
-  left:0; */
+  border: 1px transparent solid;
+  border-radius: 15px;
   min-height: 296px;
   min-width: 312px;
   max-height: 296px;
   max-width: 312px;
   object-fit: fill;
   transition-duration:.3s;
+  cursor: pointer;
 }
 
 .spots-wrapper{
+  display: flex;
+  justify-items: center;
   position: relative;
   top: 80px;
+  margin: 16px 0 40px 0;
+  width: 100%;
+  padding: 0 50px;
+}
+
+.spots-list-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+  width: 100%;
 }
 
 .spot-card-wrapper{
-
   min-height: 396px;
   min-width: 312px;
   max-height: 396px;
   max-width: 312px;
+  margin: 10px 10px;
 }
 .single-slideshow{
+  border: 1px transparent solid;
+  border-radius: 15px;
   display: flex;
   position: relative;
   min-height: 296px;
@@ -32,7 +47,7 @@
   overflow: hidden;
 }
 .spot-card-image-container{
-  /* position: relative; */
+  /* overflow: hidden; */
   min-height: 296px;
   min-width: 312px;
   max-height: 296px;
@@ -65,7 +80,6 @@
 
 .slideshow-button-wrapper{
   display:flex;
-  justify-content: space-between;
   position: relative;
   top:-165px;
   min-width: 312px;
@@ -74,4 +88,58 @@
 
 .spot-card-wrapper:hover .slideshow-button{
   opacity: .8;
+}
+
+.prev{
+  visibility: hidden;
+}
+
+.slideshow-button.next{
+  position: absolute;
+  right: 0px;
+}
+
+.slide-dots-wrapper{
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  min-width: 312px;
+  max-width: 312px;
+  pointer-events:none;
+}
+.slide-dot:first-of-type{
+  background-color: white;
+}
+.slide-dot{
+  width: 7px;
+  height: 7px;
+  margin: 5px 2px;
+  border: 1px solid transparent;
+  border-radius: 99px;
+  background-color: rgba(156,166,154, .6);
+  z-index: 3;
+}
+.spot-card-info-wrapper {
+  color: black;
+  text-decoration: none;
+  line-height: 23px;
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+  margin-top: -20px;
+  margin-left: 5px;
+}
+
+.spot-card-info-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.spot-card-price,
+.spot-card-location {
+   font-weight: bold;
 }

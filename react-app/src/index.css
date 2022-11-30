@@ -5,7 +5,14 @@ html, body, #root {
   margin: auto;
   padding: 0;
 }
-
+#root{
+  display: flex;
+  justify-content: center;
+}
 #map {
   height: 500px;
+}
+
+*{
+  box-sizing: border-box;
 }

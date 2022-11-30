@@ -38,6 +38,7 @@ class Review(db.Model):
             'id': self.id,
             'userId': self.userId,
             'spotId': self.spotId,
+            'reviewer': self.reviewer.to_dict(),
             'body': self.body,
             'rating': self.rating,
             'createdAt': json.dumps(self.createdAt, default=str),

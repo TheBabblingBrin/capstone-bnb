@@ -18,7 +18,7 @@ const SpotIndex = () =>{
   const spotList = Object.values(spots)
   return(
     <div className='spots-wrapper'>
-      <ul>
+      <ul className='spots-list-wrapper'>
         {spotList?.length > 0 && spotList.map(spot =>
           <SpotCard spot={spot}/>
           )}
