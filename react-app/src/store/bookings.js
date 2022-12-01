@@ -91,7 +91,6 @@ export const addBookingThunk = (booking) => async (dispatch) =>{
 }
 
 export const updateBookingThunk = (booking, id) => async (dispatch) =>{
-  console.log('BOOKING THUNK', booking)
 
   const response = await fetch(`/api/bookings/${id}`,{
     method: "PUT",

@@ -52,7 +52,6 @@ const ReviewCard = ({review, manage=false}) =>{
             <div>
             <h4>{review.spot?.name}</h4>
             <h6>{review.spot?.city}, {review.spot?.state}</h6>
-            </div>
             <div className='review-buttons'>
               <button
               className='edit-review'
@@ -62,6 +61,7 @@ const ReviewCard = ({review, manage=false}) =>{
               className='delete-review'
               onClick={()=> deleteReview(review.id)}
               ><i class="fa-solid fa-trash"></i></button>
+            </div>
             </div>
             <span>Reviewed on {review.updatedAt.split(' ')[0].slice(1)}</span>
           </div>

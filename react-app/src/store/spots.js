@@ -72,14 +72,18 @@ export const addSpotThunk = (spot) => async (dispatch) =>{
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(spot),
   })
-  console.log('RESPONSE', response)
   if(response.ok){
     const data = await response.json();
+    if (data.errors) {
+      return data;
+    }
     await dispatch(addSpot(data))
     return data;
   }else if (response.status < 500) {
     const data = await response.json();
     if (data) {
+      console.log('NOTNOTOKOKOKOKOKOKOK', data)
+
       return data;
     }
   } else {
@@ -118,8 +122,9 @@ export const removeSpotThunk = (spotId) => async (dispatch) =>{
   })
 
   if(response.ok){
+    const data = await response.json();
     dispatch(removeSpot(spotId))
-    return;
+    return data;
   }else if (response.status < 500) {
     const data = await response.json();
     if (data.errors) {

@@ -1,13 +1,14 @@
 import {useEffect, useState} from 'react'
 import { useSelector, useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { getSpotThunk, loadSpotsThunk, updateSpotThunk } from '../../../store/spots';
+import { getSpotThunk, loadSpotsThunk, removeSpotThunk, updateSpotThunk } from '../../../store/spots';
+import SpotFormModal from '../spotform/index'
 import '.././index.css'
 
 
 
 
-const SpotCard = ({spot}) =>{
+const SpotCard = ({spot, manage=false}) =>{
   const dispatch = useDispatch()
   const history = useHistory()
   const spots = useSelector(state => state.spots.allSpots)
@@ -15,6 +16,7 @@ const SpotCard = ({spot}) =>{
   const [next, setNext] = useState()
   const [prev, setPrev] = useState()
   const [dots, setDots] = useState()
+  const [showForm, setShowForm] = useState(false)
 
 
 
@@ -56,7 +58,12 @@ const SpotCard = ({spot}) =>{
   const getSpot =async ()=>{
     history.push(`/spots/${spot.id}`)
   }
-
+  const deleteSpot = async (id) =>{
+    let success = await dispatch(removeSpotThunk(id))
+    if(success){
+      dispatch(loadSpotsThunk())
+    }
+  }
   if(!spot) return <h1>Loading...</h1>
   let spotRating;
   let ratingArr = spot.avg_rating.toString().split('');
@@ -67,7 +74,7 @@ const SpotCard = ({spot}) =>{
    else spotRating = parseFloat(spot.avg_rating).toFixed(1);
 
   return(
-    <div className='spot-card-wrapper'>
+    <div className={manage?'spot-card-wrapper manage':'spot-card-wrapper'}>
       <div className='single-slideshow'>
           {spot.images?.length > 0 && spot.images.map((image,idx) =>
           <div className='spot-card-image-container'>
@@ -113,10 +120,23 @@ const SpotCard = ({spot}) =>{
                   <span className='spot-card-price'>${spot.price}</span> night
                </div>
             </div>
-            <div className="spot-card-info-right">
+            <div className={manage? "spot-card-info-right manage":"spot-card-info-right"}>
               {spotRating === null? null: `★${spotRating}`}
+              {manage &&
+              <div className='review-buttons'>
+                <SpotFormModal update={true} spot={spot}/>
+                <button
+                  className='delete-review'
+                  onClick={()=> deleteSpot(spot.id)}
+                  ><i class="fa-solid fa-trash"></i></button>
+              </div>
+
+              }
             </div>
         </div>
+        {/* {showForm &&
+        <SpotForm />
+        } */}
     </div>
   )
 

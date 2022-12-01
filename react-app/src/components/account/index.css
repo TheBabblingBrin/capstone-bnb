@@ -1,4 +1,25 @@
-
+.create-spot-button{
+  width: 50%;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgb(229,29,84);
+  color: white;
+  font-size: 16px;
+  margin-bottom:15px;
+  cursor: pointer;
+}
+.create-spot-button:hover:active{
+  width: 40%;
+  padding: 6px;
+  background-color: #ff385c;
+  font-size: 15px;
+}
+.modal-box-spot{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
 .account-items-wrapper{
   display: grid;
   grid-template-columns: 50% 50%;
@@ -15,6 +36,16 @@
 
 .account-spots{
   border-right:1px solid rgba(211, 211, 211, .6);
+}
+.account-spots-list{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex-wrap: wrap;
+  top: 50px;
+  margin: 10px 10px;
+  max-width: 100%;
 }
 
 .account-reviews-list{
@@ -43,6 +74,45 @@
 .reviewer-info.management span{
   font-size: 12px;
   margin: 4px 10px;
+}
+.review-buttons{
+  display: flex;
+  justify-content: space-between;
+  width: 80px;
+  position: relative;
+  bottom: 20px;
+
+}
+.review-buttons button{
+  width: 35px;
+  height: 30px;
+  padding: 6px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgb(229,29,84);
+  color: white;
+  font-size: 14px;
+  margin-top:15px;
+  cursor: pointer;
+  opacity: 0;
+}
+.single-review-wrapper:hover button{
+  opacity: 1;
+}
+
+.spot-card-wrapper:hover button{
+  opacity: 1;
+
+}
+.spot-card-wrapper .review-buttons{
+  bottom: 10px;
+}
+
+.review-buttons button:hover:active{
+  width: 30px;
+  padding: 5px;
+  background-color: #ff385c;
+  font-size: 12px;
 }
 .account-item-container h3{
   position: absolute;
@@ -116,4 +186,13 @@
 .user-meta-data span{
   color:rgb(123, 123, 123);
   font-size: 14px;
+}
+/* .spot-card-wrapper.manage .single-slideshow{
+ scale: .6;
+} */
+.spot-card-wrapper.manage{
+ scale: .8;
+ margin: -40px 0;
+
+
 }

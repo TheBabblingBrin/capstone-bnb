@@ -5,15 +5,21 @@ import {useSelector, useDispatch} from 'react-redux';
 import './index.css';
 import { loadReviewsThunk } from '../../store/reviews';
 import ReviewCard from '../reviews/reviewcard';
+import { loadSpotsThunk } from '../../store/spots';
+import SpotCard from '../spots/spotsindex/spotcard';
+import SpotFormModal from '../spots/spotform';
 
 function AccountPage (){
    const dispatch = useDispatch();
    const user = useSelector(state => state.session.user)
    const userReviews = useSelector(state => state.reviews.allReviews)
+   const spots = useSelector(state => state.spots.allSpots)
    let reviewList
+   let spotsList
 
    useEffect(() => {
     dispatch(loadReviewsThunk())
+    dispatch(loadSpotsThunk())
    }, [])
 
    useEffect(() =>{
@@ -22,7 +28,10 @@ function AccountPage (){
 
    if(userReviews){
     reviewList = Object.values(userReviews)
-    console.log(reviewList)
+   }
+   if(spots){
+    spotsList = Object.values(spots).filter((spot, idx) => spot.owner?.id == user.id)
+    console.log(spotsList)
    }
    return (
     <div className='account-page-wrapper'>
@@ -39,6 +48,11 @@ function AccountPage (){
       <div className='account-items-wrapper'>
         <div className='account-item-container account-spots'>
           <h3>Manage your listings</h3>
+          <div className='account-spots-list'>
+          <SpotFormModal />
+          {spotsList?.length > 0 && spotsList.map(spot =>
+            <SpotCard spot={spot} manage={true}/>)}
+          </div>
         </div>
         <div className='account-item-container account-reviews'>
           <h3>Manage your reviews</h3>
