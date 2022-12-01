@@ -3,14 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import ErrorDisplay from '../../auth/ErrorDisplay'
 import {loadReviewsThunk, updateReviewThunk, addReviewThunk} from '../../../store/reviews'
-import { loadSpotsThunk } from '../../../store/spots';
+import { getSpotThunk, loadSpotsThunk } from '../../../store/spots';
+import StarHovering from './stars';
 
-const ReviewForm = ({update = false, review, spotId, setShowForm}) => {
+
+const ReviewForm = ({update = false, review, spotId, setShowModal}) => {
   const dispatch = useDispatch()
   const history = useHistory()
   // const currReview = useSelector(state => state.reviews[review?.id])
   const user = useSelector(state => state.session.user)
-  const [spot, setSpot] = useState(update? review.spotId:spotId)
+  const [spot, setSpot] = useState(update? review?.spotId:spotId)
   const [body, setBody] = useState(update? review?.body:'')
   const [rating, setRating] = useState(update? review?.rating:'')
   const [errors, setErrors] = useState([]);
@@ -40,9 +42,11 @@ const ReviewForm = ({update = false, review, spotId, setShowForm}) => {
       return
     }
     if(newReview){
+      dispatch(getSpotThunk(spotId))
       dispatch(loadSpotsThunk())
-      if(setShowForm){
-        setShowForm(false)
+
+      if(setShowModal){
+        setShowModal(false)
       }
       // history.push(`/Reviews/${newReview.Review.id}`)
     }
@@ -54,77 +58,21 @@ const ReviewForm = ({update = false, review, spotId, setShowForm}) => {
       <div>
           <ErrorDisplay id={'review-error-list'} errors={errors}/>
         </div>
-        <label>
+        <div className='review-textarea-container'>
             <textarea
             type='text'
             value={body}
             onChange={(e) => setBody(e.target.value)}
-            placeholder='Enter your experience here.'
+            placeholder='Enter your experiences here.'
             className='review-textarea'
             />
-            <div className='word-counter'>{255 - body.length > 0 ? 255 - body.length : 0} characters remaining</div>
-         </label>
-        <div className="star-radio-buttons">
+            <div className='word-counter'>{500 - body.length > 0 ? 500 - body.length : 0}/500</div>
+         </div>
 
-<label>
-   Select a Rating
-   <label>
-   <input
-      type="radio"
-      value="1"
-      name="Rating"
-      onChange={(e) => setRating(parseInt(e.target.value))}
-      checked={rating === 1 ? true: false}
-   />
-   ★
-   </label>
+        <StarHovering stars={rating} setRating={setRating}/>
 
-   <label>
-   <input
-      type="radio"
-      value="2"
-      name="Rating"
-      onChange={(e) => setRating(parseInt(e.target.value))}
-      checked={rating === 2 ? true: false}
-   />
-   ★★
-   </label>
 
-   <label>
-   <input
-      type="radio"
-      value="3"
-      name="Rating"
-      onChange={(e) => setRating(parseInt(e.target.value))}
-      checked={rating === 3 ? true: false}
-   />
-   ★★★
-   </label>
-
-   <label>
-   <input
-      type="radio"
-      value="4"
-      name="Rating"
-      onChange={(e) => setRating(parseInt(e.target.value))}
-      checked={rating === 4 ? true: false}
-   />
-   ★★★★
-   </label>
-
-   <label>
-   <input
-      type="radio"
-      value="5"
-      name="Rating"
-      onChange={(e) => setRating(parseInt(e.target.value))}
-      checked={rating === 5 ? true: false}
-   />
-   ★★★★★
-   </label>
-</label>
-</div>
-      <button className='create-Review-submit' type='submit'>{update? 'Update Review':'Post Review'}</button>
+      <button className='review-modal-button' type='submit'>{update? 'Update Review':'Post Review'}</button>
 
     </form>
   )

@@ -13,10 +13,12 @@ function LoginForm() {
 useEffect(()=>{
 const menu = document.querySelector('.user-menu')
 const profile = document.querySelector('.profile-dropdown-button')
-menu.style.visibility = 'hidden'
-return () => {
-  profile.click()
-  menu.style.visibility = 'unset'
+if(menu && profile){
+  menu.style.visibility = 'hidden'
+  return () => {
+    profile.click()
+    menu.style.visibility = 'unset'
+  }
 }
 },[])
 

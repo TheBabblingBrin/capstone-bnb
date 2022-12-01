@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom';
 import ErrorDisplay from '../../auth/ErrorDisplay'
 import {loadBookingsThunk, updateBookingThunk, addBookingThunk} from '../../../store/bookings'
 import './index.css'
+import LoginFormModal from '../../auth/User/LoginFormModal';
+import { check } from 'express-validator';
 const formatDate = (date) => {
   let d = new Date(date),
       month = '' + (d.getMonth() + 1),
@@ -22,8 +24,8 @@ const BookingForm = ({update = false, booking, spot}) => {
   const history = useHistory()
   const currbooking = useSelector(state => state.bookings[booking?.id])
   const user = useSelector(state => state.session.user)
-  const [startDate, setStartDate] = useState(update? formatDate(booking?.start_date):'')
-  const [endDate, setEndDate] = useState(update? formatDate(booking?.end_date):'')
+  const [startDate, setStartDate] = useState(update? formatDate(booking?.start_date):null)
+  const [endDate, setEndDate] = useState(update? formatDate(booking?.end_date):null)
   const [errors, setErrors] = useState([]);
   const [showPrice, setShowPrice] = useState(false);
   const [nights, setNights] = useState()
@@ -42,10 +44,24 @@ const BookingForm = ({update = false, booking, spot}) => {
     setNights((new Date(endDate)-new Date(startDate))/ (1000 * 3600 * 24))
   }, [dispatch, startDate,endDate])
 
-
+  const checkDates = () => {
+    const dateErrors = []
+    if(!startDate){
+      dateErrors.push('Please input a check-in date.')
+    }
+    if(!endDate){
+      dateErrors.push('Please input a check-out date.')
+    }
+    setErrors(dateErrors)
+    return dateErrors
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrors([])
+
+    const dateErrors = checkDates()
+    if(errors.length >0 || dateErrors.length > 0)return
 
     const payload = {
       spotId:spot.id,
@@ -54,12 +70,13 @@ const BookingForm = ({update = false, booking, spot}) => {
 
     };
     let newbooking = !update? await dispatch(addBookingThunk(payload)): await dispatch(updateBookingThunk(payload,booking?.id))
+    console.log(newbooking)
     if(newbooking.errors){
+
       setErrors(newbooking.errors)
       return
     }
     if(newbooking){
-      console.log('NEWSTUFF',newbooking)
       // dispatch(loadBookingsThunk())
       // history.push(`/bookings/${newbooking.booking.id}`)
     }
@@ -78,7 +95,6 @@ const BookingForm = ({update = false, booking, spot}) => {
                       CHECK-IN
                   <input
                     type="date"
-                    required
                     value={startDate}
                     onChange={updateStartDate}
                   />
@@ -89,7 +105,6 @@ const BookingForm = ({update = false, booking, spot}) => {
                     CHECK-OUT
                   <input
                     type="date"
-                    required
                     value={endDate}
                     onChange={updateEndDate}
                   />
@@ -98,7 +113,12 @@ const BookingForm = ({update = false, booking, spot}) => {
         </div>
 
       <div className='booking-button-wrapper'>
+        {user &&
         <button className='create-booking-submit' type='submit'>{update? 'Update':'Reserve'}</button>
+        }
+        {!user &&
+         <LoginFormModal location={'Reserve'}/>
+        }
 
       </div>
 

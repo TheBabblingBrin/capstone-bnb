@@ -3,6 +3,7 @@ import { useSelector, useDispatch} from 'react-redux';
 import { loadReviewsThunk } from '../../../store/reviews';
 import ReviewCard from '../reviewcard'
 import '../index.css'
+import ReviewFormModal from '../reviewmodal';
 
 
 
@@ -19,6 +20,8 @@ const ReviewIndex = ({spot, spotrating}) =>{
   const reviewList = Object.values(reviews)
   return(
     <div className='reviews-wrapper'>
+        <h5>Let others know about your stay!</h5>
+        <ReviewFormModal spotId={spot.id}/>
       <div className='review-meta-data'>
       <span>★ {spotrating}</span>
       <span> · </span>

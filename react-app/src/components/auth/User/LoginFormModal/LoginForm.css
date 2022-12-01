@@ -11,6 +11,15 @@
   margin-top:-1px;
 }
 
+.modal-forms h3, h6{
+  align-self: center;
+  margin-top:0;
+}
+.modal-forms h6{
+  margin: 10px 0 -10px 0;
+  cursor: pointer;
+  color: rgb(181, 178, 178);
+}
 .first-field{
   border-radius: 8px 8px 0 0;
 

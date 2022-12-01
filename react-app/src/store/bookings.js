@@ -68,7 +68,6 @@ export const getBookingThunk = (bookingId) => async (dispatch) => {
 }
 
 export const addBookingThunk = (booking) => async (dispatch) =>{
-  console.log('BOOKING THUNK', booking)
   const response = await fetch('/api/bookings',{
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -76,6 +75,9 @@ export const addBookingThunk = (booking) => async (dispatch) =>{
   })
   if(response.ok){
     const data = await response.json();
+    if(data.errors){
+      return data
+    }
     await dispatch(addBooking(data.booking))
     return data;
   }else if (response.status < 500) {
@@ -89,6 +91,7 @@ export const addBookingThunk = (booking) => async (dispatch) =>{
 }
 
 export const updateBookingThunk = (booking, id) => async (dispatch) =>{
+  console.log('BOOKING THUNK', booking)
 
   const response = await fetch(`/api/bookings/${id}`,{
     method: "PUT",

@@ -13,7 +13,7 @@ function UserMenu({setShowMenu}) {
       {!user &&
       <>
         <LoginFormModal />
-        <LoginFormModal signup={true}/>
+        <LoginFormModal location={'Sign up'}/>
 
       </>
       }

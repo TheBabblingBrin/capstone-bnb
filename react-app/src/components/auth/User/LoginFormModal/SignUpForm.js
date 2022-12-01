@@ -3,23 +3,28 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import ErrorDisplay from '../../ErrorDisplay'
 import { signUp } from '../../../../store/session';
+import LoginFormModal from '.';
+import LoginForm from './LoginForm';
 
-const SignUpForm = () => {
+const SignUpForm = ({location=null, setShowModal}) => {
   const [errors, setErrors] = useState([]);
   const [firstName, setFirstname] = useState('');
   const [lastName, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [loginForm, setLoginForm] = useState(false)
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   useEffect(()=>{
     const menu = document.querySelector('.user-menu')
     const profile = document.querySelector('.profile-dropdown-button')
-    menu.style.visibility = 'hidden'
-    return () => {
-      profile.click()
-      menu.style.visibility = 'unset'
+    if(menu && profile){
+      menu.style.visibility = 'hidden'
+      return () => {
+        profile.click()
+        menu.style.visibility = 'unset'
+      }
     }
     },[])
 
@@ -62,12 +67,20 @@ const SignUpForm = () => {
     return <Redirect to='/' />;
   }
 
+  if(loginForm){
+    return (
+      <LoginForm />
+    )
+  }
   return (
     <form onSubmit={onSignUp} className="modal-forms">
       {errors.length > 0 &&
        <div className='signup-error-list'>
         <ErrorDisplay id={'signup-error-list'} errors={errors}/>
         </div>}
+      {location === 'Reserve' &&
+      <h3>Your dream vacation is waiting for you!</h3>
+      }
       <div className='login-form-fields'>
         <input
           className='login-input first-field'
@@ -127,6 +140,7 @@ const SignUpForm = () => {
       <div className='login-button-wrapper'>
         <button type='submit' className='login-button'>Sign Up</button>
       </div>
+      <h6 onClick={()=> setLoginForm(true)}>Already have an account? Login here</h6>
     </form>
   );
 };

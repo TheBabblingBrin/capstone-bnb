@@ -63,6 +63,7 @@ class Spot(db.Model):
             'country': self.country,
             'description': self.description,
             'price': self.price,
+            'bookings': [booking.to_dict() for booking in self.bookings],
             'avg_rating': sum([review.to_dict()['rating'] for review in self.reviews])/(len(self.reviews) or 1),
             'reviews': sorted([review.to_dict() for review in self.reviews], key=lambda x: x['createdAt']),
             'images': sorted([image.to_dict() for image in self.images], key=lambda x: x['order']),

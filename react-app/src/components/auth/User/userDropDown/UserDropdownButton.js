@@ -26,7 +26,7 @@ function UserDropdownButton() {
         <button
           onClick={() => setShowMenu(!showMenu)}
           className='profile-dropdown-button'
-          ><i class="fa-sharp fa-solid fa-bars"></i>
+          ><i className="fa-sharp fa-solid fa-bars"></i>
             <div className='user-logo'>
             <img src='https://res.cloudinary.com/degkakjou/image/upload/v1669680635/AirBnB/user_pic-50x50_napyep.png'></img>
           </div>
