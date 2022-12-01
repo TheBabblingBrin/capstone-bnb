@@ -13,7 +13,6 @@ def validation_errors_to_error_messages(validation_errors):
     """
     errorMessages = []
     for field in validation_errors:
-        print(field)
         for error in validation_errors[field]:
             errorMessages.append(f'{field} : {error}')
     return errorMessages

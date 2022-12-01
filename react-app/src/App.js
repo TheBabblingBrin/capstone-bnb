@@ -5,7 +5,6 @@ import NavBar from './components/navigation/navbar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { authenticate } from './store/session';
 import SpotIndex from './components/spots/spotsindex';
-import SpotForm from './components/spots/spotform';
 import SingleSpot from './components/spots/singleSpot';
 import AccountPage from './components/account';
 

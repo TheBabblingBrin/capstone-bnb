@@ -1,6 +1,5 @@
 
 import React, {useEffect} from 'react';
-import {Link, NavLink} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import './index.css';
 import { loadReviewsThunk } from '../../store/reviews';
@@ -15,25 +14,23 @@ function AccountPage (){
    const user = useSelector(state => state.session.user)
    const userReviews = useSelector(state => state.reviews.allReviews)
    const spots = useSelector(state => state.spots.allSpots)
-   const bookings = useSelector(state => state.bookings.allBookings)
    let reviewList
    let spotsList
 
    useEffect(() => {
     dispatch(loadReviewsThunk())
     dispatch(loadSpotsThunk())
-   }, [])
+   }, [dispatch])
 
    useEffect(() =>{
 
-   }, [userReviews])
+   }, [userReviews, dispatch])
 
    if(userReviews){
     reviewList = Object.values(userReviews)
    }
    if(spots){
-    spotsList = Object.values(spots).filter((spot, idx) => spot.owner?.id == user.id)
-    console.log(spotsList)
+    spotsList = Object.values(spots).filter((spot, idx) => spot.owner?.id === user.id)
    }
    return (
     <div className='account-page-wrapper'>
@@ -46,7 +43,7 @@ function AccountPage (){
 
         </div>
         <div className='account-profile-image'>
-          <img src='https://res.cloudinary.com/degkakjou/image/upload/v1669764105/AirBnB/whiteclipart2562521_iu2nva.png'></img>
+          <img alt="profile"src='https://res.cloudinary.com/degkakjou/image/upload/v1669764105/AirBnB/whiteclipart2562521_iu2nva.png'></img>
         </div>
       </div>
       <div className='account-items-wrapper'>

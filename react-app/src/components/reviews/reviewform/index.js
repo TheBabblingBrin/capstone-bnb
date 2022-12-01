@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useDispatch} from 'react-redux';
 import ErrorDisplay from '../../auth/ErrorDisplay'
 import {loadReviewsThunk, updateReviewThunk, addReviewThunk} from '../../../store/reviews'
 import { getSpotThunk, loadSpotsThunk } from '../../../store/spots';
@@ -9,19 +8,14 @@ import StarHovering from './stars';
 
 const ReviewForm = ({update = false, review, spotId, setShowModal, setShowForm}) => {
   const dispatch = useDispatch()
-  const history = useHistory()
-  // const currReview = useSelector(state => state.reviews[review?.id])
-  const user = useSelector(state => state.session.user)
-  const [spot, setSpot] = useState(update? review?.spotId:spotId)
+
   const [body, setBody] = useState(update? review?.body:'')
   const [rating, setRating] = useState(update? review?.rating:'')
   const [errors, setErrors] = useState([]);
+  let spot = update? review?.spotId:spotId
 
-  const updateBody = (e) => setBody(e.target.value);
-  const updateRating = (e) => setRating(e.target.value);
   useEffect(()=>{
     dispatch(loadReviewsThunk())
-
 
   }, [dispatch])
 
@@ -50,7 +44,6 @@ const ReviewForm = ({update = false, review, spotId, setShowModal, setShowForm})
       if(setShowForm){
         setShowForm(false)
       }
-      // history.push(`/Reviews/${newReview.Review.id}`)
     }
   }
 

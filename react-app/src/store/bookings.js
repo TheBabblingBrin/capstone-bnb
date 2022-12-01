@@ -49,12 +49,10 @@ export const loadBookingsThunk = ()=> async (dispatch) => {
 }
 
 export const getBookingThunk = (bookingId) => async (dispatch) => {
-  console.log('GETTING BOOKING', bookingId)
   const response = await fetch(`/api/bookings/${bookingId}`)
 
   if(response.ok){
     const data = await response.json();
-    console.log('GOT IT BOSS', data)
     dispatch(getBooking(data.booking))
     return data.booking;
   }else if (response.status < 500) {
@@ -101,6 +99,9 @@ export const updateBookingThunk = (booking, id) => async (dispatch) =>{
 
   if(response.ok){
     const data = await response.json();
+    if(data.errors){
+      return data
+    }
     dispatch(addBooking(data.booking))
     return data;
   }else if (response.status < 500) {

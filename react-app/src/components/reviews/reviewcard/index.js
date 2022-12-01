@@ -1,21 +1,17 @@
 import {useEffect, useState} from 'react'
 import { useSelector, useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { getReviewThunk, loadReviewsThunk, removeReviewThunk, updateReviewThunk } from '../../../store/reviews';
+import { loadReviewsThunk, removeReviewThunk } from '../../../store/reviews';
 import { getSpotThunk, loadSpotsThunk } from '../../../store/spots';
 import ReviewForm from '../reviewform';
 import '.././index.css'
 
 
-
-
 const ReviewCard = ({review, manage=false}) =>{
   const dispatch = useDispatch()
   const history = useHistory()
-  const reviews = useSelector(state => state.spots.currentSpot.spot?.reviews)
   const userReviews = useSelector(state=> state.reviews.allReviews)
   const [showForm, setShowForm] = useState(false)
-  const [confirmDelete, setConfirmDelete] = useState(false)
 
   useEffect(()=>{
   },[dispatch, userReviews])
@@ -38,12 +34,12 @@ const ReviewCard = ({review, manage=false}) =>{
       <div className='review-meta'>
       {!manage &&
         <div className='review-profile-pic'>
-          <img src='https://res.cloudinary.com/degkakjou/image/upload/v1669764105/AirBnB/whiteclipart2562521_iu2nva.png'></img>
+          <img alt='profile'src='https://res.cloudinary.com/degkakjou/image/upload/v1669764105/AirBnB/whiteclipart2562521_iu2nva.png'></img>
         </div>}
         {manage &&
           <div className='review-listing-pic'>
-            <img src={review.spot?.images[0].url} onClick={()=>history.push(`/spots/${review.spot.id}`)}></img>
-           </div>}
+            <img alt='spot' src={review.spot?.images[0].url} onClick={()=>history.push(`/spots/${review.spot.id}`)}></img>
+          </div>}
       {!manage &&
         <div className='reviewer-info'>
           <h4>{review.reviewer.firstName}</h4>

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import ErrorDisplay from '../../auth/ErrorDisplay'
 import {loadBookingsThunk, updateBookingThunk, addBookingThunk} from '../../../store/bookings'
 import './index.css'
@@ -20,13 +19,10 @@ const formatDate = (date) => {
 }
 const BookingForm = ({update = false, booking, spot,setShowForm}) => {
   const dispatch = useDispatch()
-  const history = useHistory()
-  const currbooking = useSelector(state => state.bookings[booking?.id])
   const user = useSelector(state => state.session.user)
   const [startDate, setStartDate] = useState(update? formatDate(booking?.start_date):null)
   const [endDate, setEndDate] = useState(update? formatDate(booking?.end_date):null)
   const [errors, setErrors] = useState([]);
-  const [showPrice, setShowPrice] = useState(false);
   const [nights, setNights] = useState()
 
 

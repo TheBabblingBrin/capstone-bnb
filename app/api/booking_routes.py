@@ -77,7 +77,19 @@ def update_booking(bookingId):
     return{{'errors': 'You must own a booking to update it.'}}
   if form.validate_on_submit():
       data = form.data
-      print('IM UPDATING MYSELF', data)
+      dateErrors = {}
+      spot = booking.to_dict()['spotId']
+      spotBookings = Spot.query.get_or_404(spot).to_dict()['bookings']
+      spotBookings = [[date['start_date'],date['end_date'], date['userId']] for date in spotBookings]
+      for date in spotBookings:
+        if (data['start_date'] <= date[1].date()) and (date[0].date() <= data['end_date'] and date[2] != current_user.id):
+          dateErrors['Date'] = ['These dates are already taken. Please try again.']
+      if data['start_date'] > data['end_date']:
+        dateErrors['Dates'] = ['Please pick an end date occuring after your start date']
+      if datetime.now().date() > data['start_date'] or datetime.now().date() > data['end_date']:
+        dateErrors['Past Dates'] = ['Please pick dates in the future.']
+      if bool(dateErrors):
+        return {'errors': validation_errors_to_error_messages(dateErrors)}
       booking.start_date = data['start_date']
       booking.end_date = data['end_date']
 
@@ -86,7 +98,6 @@ def update_booking(bookingId):
       spot = Spot.query.get(newbooking['spotId'])
       newbooking['spot'] = spot.to_dict()
       return {'booking': newbooking}
-
   return {'errors': validation_errors_to_error_messages(form.errors)}
 
 @booking_routes.route('/<int:bookingId>', methods=['DELETE'])

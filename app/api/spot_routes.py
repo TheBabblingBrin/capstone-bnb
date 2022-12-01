@@ -47,7 +47,6 @@ def create_spot():
       if re.match("^$|(?:http\:|https\:)?\/\/.*\.(?:png|jpg|jpeg)", image) == None:
         dateErrors[f'Image {i+1}'] = ['Please use a valid image URL (https://ex.jpg/jpeg/png)']
     if bool(dateErrors):
-      print('ERRRRRRRRRROS', dateErrors)
       return {'errors': validation_errors_to_error_messages(dateErrors)}
 
     data = form.data

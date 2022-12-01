@@ -1,11 +1,9 @@
 import {useEffect, useState} from 'react'
 import { useSelector, useDispatch} from 'react-redux';
 import { loadReviewsThunk } from '../../../store/reviews';
-
 import ReviewCard from '../reviewcard'
 import '../index.css'
 import ReviewFormModal from '../reviewmodal';
-import { getSpotThunk } from '../../../store/spots';
 
 
 
@@ -25,11 +23,14 @@ const ReviewIndex = ({spot, spotrating}) =>{
       return
     }
     for(let rev of Object.values(reviews)){
-      if(rev.reviewer.id == user.id){
+      if(rev.reviewer.id === user.id){
         setLeftReview(true)
+        return
       }
     }
-  }, [dispatch, reviews])
+      setLeftReview(false)
+
+  }, [dispatch, reviews, user])
 
 
   if(!reviews ) return <h1>Loading...</h1>

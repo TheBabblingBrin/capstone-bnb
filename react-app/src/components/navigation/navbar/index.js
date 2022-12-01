@@ -11,6 +11,7 @@ return(
     <input
     className='logo-button'
     type='image'
+    alt='logo'
     src='https://res.cloudinary.com/degkakjou/image/upload/v1669675017/AirBnB/clipart2562521_bymb0p.png'
     onClick={()=> history.push('/')}></input>
     </div>

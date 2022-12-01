@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
-
-
-import { useDispatch } from "react-redux";
 import ReviewForm from '../reviewform';
 
 
 
 function ReviewFormModal({spotId}) {
   const [showModal, setShowModal] = useState(false);
-  const dispatch = useDispatch();
 
   return (
     <div className={'review-modal-wrapper'}>

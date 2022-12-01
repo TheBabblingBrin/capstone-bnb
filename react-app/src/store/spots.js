@@ -82,7 +82,6 @@ export const addSpotThunk = (spot) => async (dispatch) =>{
   }else if (response.status < 500) {
     const data = await response.json();
     if (data) {
-      console.log('NOTNOTOKOKOKOKOKOKOK', data)
 
       return data;
     }
@@ -98,8 +97,6 @@ export const updateSpotThunk = (spot, id) => async (dispatch) =>{
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(spot),
   })
-
-  console.log('RES', response)
 
   if(response.ok){
     const data = await response.json();

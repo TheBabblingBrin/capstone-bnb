@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
-import { useSelector, useDispatch} from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { getSpotThunk, loadSpotsThunk, removeSpotThunk, updateSpotThunk } from '../../../store/spots';
+import { loadSpotsThunk, removeSpotThunk} from '../../../store/spots';
 import SpotFormModal from '../spotform/index'
 import '.././index.css'
 
@@ -11,12 +11,10 @@ import '.././index.css'
 const SpotCard = ({spot, manage=false}) =>{
   const dispatch = useDispatch()
   const history = useHistory()
-  const spots = useSelector(state => state.spots.allSpots)
   const [slides , setSlides] = useState([])
   const [next, setNext] = useState()
   const [prev, setPrev] = useState()
   const [dots, setDots] = useState()
-  const [showForm, setShowForm] = useState(false)
 
 
 
@@ -32,12 +30,12 @@ const SpotCard = ({spot, manage=false}) =>{
       setNext(document.getElementById(`next${spot.id}`))
       setDots(document.querySelectorAll(`.dot-${spot.id}`))
     }, 200)
-  },[])
+  },[spot?.id])
   const hideButtons = (num) =>{
     num === slides.length -1? next.style.visibility = 'hidden': next.style.visibility = 'visible'
     num === 0? prev.style.visibility = 'hidden': prev.style.visibility = 'visible'
     const currDots = Array.from(dots).map(dot => dot.id)
-    dots.forEach(dot => dot.id == currDots[num]? dot.style.backgroundColor = 'white': dot.style.backgroundColor = 'rgba(156,166,154, .6)' )
+    dots.forEach(dot => dot.id === currDots[num]? dot.style.backgroundColor = 'white': dot.style.backgroundColor = 'rgba(156,166,154, .6)' )
   }
 
   const goNext = ()=>{
@@ -77,9 +75,10 @@ const SpotCard = ({spot, manage=false}) =>{
     <div className={manage?'spot-card-wrapper manage':'spot-card-wrapper'}>
       <div className='single-slideshow'>
           {spot.images?.length > 0 && spot.images.map((image,idx) =>
-          <div className='spot-card-image-container'>
+          <div key ={image.id}className='spot-card-image-container'>
 
               <img
+              alt=''
               onClick={() => getSpot()}
               className={`spot-card-image spot-image${spot.id}`}
               src={image.url}
@@ -88,7 +87,7 @@ const SpotCard = ({spot, manage=false}) =>{
               )}
               <div className='slide-dots-wrapper'>
               {spot.images?.length > 0 && spot.images.map(image =>
-                <div className={`slide-dot dot-${spot.id}`} id={`slide-dot-${image.id}`}></div>
+                <div key ={`dot${image.id}`} className={`slide-dot dot-${spot.id}`} id={`slide-dot-${image.id}`}></div>
               )
               }
               </div>
@@ -98,12 +97,12 @@ const SpotCard = ({spot, manage=false}) =>{
 
           <div className='slideshow-button prev' id={`prev${spot.id}`}
           onClick={()=>goPrev()}>
-          <a>&#10094;</a>
+          <div>&#10094;</div>
           </div>
 
           <div className='slideshow-button next' id={`next${spot.id}`}
           onClick={()=>goNext()}>
-          <a>&#10095;</a>
+          <div>&#10095;</div>
           </div>
 
 
@@ -134,9 +133,6 @@ const SpotCard = ({spot, manage=false}) =>{
               }
             </div>
         </div>
-        {/* {showForm &&
-        <SpotForm />
-        } */}
     </div>
   )
 

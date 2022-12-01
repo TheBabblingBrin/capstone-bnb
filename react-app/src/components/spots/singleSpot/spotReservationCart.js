@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react'
 import { useSelector, useDispatch} from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import BookingForm from '../../bookings/bookingform';
 import '.././index.css'
 
@@ -9,20 +8,19 @@ import '.././index.css'
 
 const ReservationCart = ({spot,spotrating}) =>{
   const dispatch = useDispatch()
-  const history = useHistory()
-  const [showPrice, setShowPrice] = useState(false)
   const [owned, setOwned] = useState(false)
   const user = useSelector(state => state.session.user)
 
 
   useEffect(()=>{
     if(user){
-      if(user.id !== spot.owner.id){
+      if(user.id === spot.owner.id){
         setOwned(true)
       }
-    }
-
-  },[dispatch])
+      }else{
+        setOwned(false)
+      }
+  },[dispatch, user, spot.owner.id])
 
   return(
 

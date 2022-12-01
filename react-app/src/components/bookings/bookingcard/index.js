@@ -44,7 +44,7 @@ const BookingCard = ({booking}) =>{
     <div>
     <div className='single-booking-wrapper'>
         <div className='review-listing-pic'>
-            <img src={booking.spot?.images[0].url} onClick={()=>history.push(`/spots/${booking.spot.id}`)}></img>
+            <img alt='booking'src={booking.spot?.images[0].url} onClick={()=>history.push(`/spots/${booking.spot.id}`)}></img>
         </div>
       <div className='booking-info'>
         <h4>{booking.spot.name}</h4>

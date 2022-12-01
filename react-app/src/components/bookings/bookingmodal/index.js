@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import BookingIndex from '../bookingindex/index'
-import { useDispatch } from "react-redux";
 
-function BookingModal({}) {
+function BookingModal() {
   const [showModal, setShowModal] = useState(false);
-  const dispatch = useDispatch();
 
   return (
     <div className={'booking-box-spot'}>

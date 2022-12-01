@@ -56,7 +56,6 @@ const SpotForm = ({update = false, spot, setShowModal}) => {
     };
     let newspot = !update? await dispatch(addSpotThunk(payload)): await dispatch(updateSpotThunk(payload,spot?.id))
     if(newspot.errors){
-      console.log(newspot.errors)
       setErrors(newspot.errors)
       return
     }

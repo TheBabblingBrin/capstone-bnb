@@ -1,11 +1,8 @@
-import {useEffect, useState} from 'react'
+import {useEffect} from 'react'
 import { useSelector, useDispatch} from 'react-redux';
-import {  useParams, useHistory} from "react-router-dom";
-import { getSpotThunk, loadSpotsThunk, removeSpotThunk } from '../../../store/spots';
-import BookingForm from '../../bookings/bookingform';
-import ReviewForm from '../../reviews/reviewform';
+import { useParams} from "react-router-dom";
+import { getSpotThunk } from '../../../store/spots';
 import ReviewIndex from '../../reviews/reviewindex';
-import SpotForm from '../spotform';
 import './index.css'
 import ReservationCart from './spotReservationCart';
 
@@ -13,21 +10,13 @@ import ReservationCart from './spotReservationCart';
 
 const SingleSpot = () =>{
   const dispatch = useDispatch()
-  const history = useHistory()
   const spot = useSelector(state => state.spots.currentSpot.spot)
   const {spotId} = useParams()
   const spots = useSelector(state => state.spots.allSpots[spotId])
 
   useEffect(()=>{
   dispatch(getSpotThunk(spotId))
-  },[spots])
-
-  const deleteSpot = async () =>{
-    let confirm = dispatch(removeSpotThunk(spot.id))
-    if(confirm){
-      history.push('/')
-    }
-  }
+  },[spots, dispatch, spotId])
 
   if(!spot ) return <h1>Loading...</h1>
 
@@ -60,11 +49,11 @@ const SingleSpot = () =>{
         </div>
         <div className='single-spot-images-wrapper'>
           <div className='single-spot-main-image'>
-            <img src={spot.images[0].url}></img>
+            <img alt='' src={spot.images[0].url}></img>
           </div>
           <div className='single-spot-mini-image-wrapper'>
             {spot.images.slice(1).map(image =>
-              <img src={image.url}></img>
+              <img alt='' src={image.url}></img>
               )}
           </div>
         </div>
@@ -75,7 +64,7 @@ const SingleSpot = () =>{
                 className='single-spot-title'>{`Hosted by ${spot.owner.firstName}`}
               </h2>
               <div className='host-profile-pic'>
-                <img src='https://res.cloudinary.com/degkakjou/image/upload/v1669764105/AirBnB/whiteclipart2562521_iu2nva.png'></img>
+                <img alt=''src='https://res.cloudinary.com/degkakjou/image/upload/v1669764105/AirBnB/whiteclipart2562521_iu2nva.png'></img>
               </div>
             </div>
             <div className='spot-awards'>
@@ -107,7 +96,7 @@ const SingleSpot = () =>{
               </div>
             </div>
           <div className='spot-protection'>
-            <img src='https://res.cloudinary.com/degkakjou/image/upload/v1669762502/AirBnB/54e427bb-9cb7-4a81-94cf-78f19156faad_vuy5mu.png'></img>
+            <img alt='' src='https://res.cloudinary.com/degkakjou/image/upload/v1669762502/AirBnB/54e427bb-9cb7-4a81-94cf-78f19156faad_vuy5mu.png'></img>
             <p>Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.</p>
           </div>
           </div>

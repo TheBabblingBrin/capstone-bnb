@@ -1,10 +1,7 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { useState, useEffect, useRef } from 'react'
+import {useEffect } from 'react'
 import './index.css'
 
 function ErrorDisplay({errors, id}) {
-  const dispatch = useDispatch()
-  const noErrorBorder = '1px solid rgba(107, 106, 106, 0.5)'
   const nodes = document.getElementsByTagName('form');
   const splashInputs = document.getElementsByClassName('login-input')
   useEffect(() => {

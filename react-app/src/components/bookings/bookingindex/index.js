@@ -1,12 +1,8 @@
-import {useEffect, useState} from 'react'
+import {useEffect} from 'react'
 import { useSelector, useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { loadBookingsThunk } from '../../../store/bookings';
 import BookingCard from '../bookingcard';
-
-
-
-
 
 const BookingIndex = () =>{
   const dispatch = useDispatch()
@@ -14,7 +10,6 @@ const BookingIndex = () =>{
   const bookings = useSelector(state => state.bookings.allBookings)
   const bookingList = Object.values(bookings)
   useEffect(()=>{
-    console.log('inside booking')
     dispatch(loadBookingsThunk())
   },[dispatch,])
 

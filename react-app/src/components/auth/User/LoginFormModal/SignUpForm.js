@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import ErrorDisplay from '../../ErrorDisplay'
 import { signUp } from '../../../../store/session';
-import LoginFormModal from '.';
 import LoginForm from './LoginForm';
 
 const SignUpForm = ({location=null, setShowModal}) => {

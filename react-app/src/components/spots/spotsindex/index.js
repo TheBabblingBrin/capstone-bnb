@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {useEffect} from 'react'
 import { useSelector, useDispatch} from 'react-redux';
 import { loadSpotsThunk } from '../../../store/spots';
 import SpotCard from './spotcard'
@@ -20,7 +20,7 @@ const SpotIndex = () =>{
     <div className='spots-wrapper'>
       <ul className='spots-list-wrapper'>
         {spotList?.length > 0 && spotList.map(spot =>
-          <SpotCard spot={spot}/>
+          <SpotCard key={spot.id}spot={spot}/>
           )}
       </ul>
     </div>

@@ -3,13 +3,9 @@ import { Modal } from '../../../context/Modal';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
 
-import { useDispatch } from "react-redux";
-
-
 
 function LoginFormModal({location = null}) {
   const [showModal, setShowModal] = useState(false);
-  const dispatch = useDispatch();
 
   return (
     <div className={location==='Reserve'? 'booking-button-wrapper':'modal-box'}>
