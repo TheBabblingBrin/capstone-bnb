@@ -11,6 +11,8 @@ const ReservationCart = ({spot,spotrating}) =>{
   const dispatch = useDispatch()
   const history = useHistory()
   const [showPrice, setShowPrice] = useState(false)
+  const user = useSelector(state => state.session.user)
+
 
   useEffect(()=>{
 
@@ -31,7 +33,10 @@ const ReservationCart = ({spot,spotrating}) =>{
             <span>{spot.reviews.length} reviews</span>
           </div>
         </div>
+        {user.id !== spot.owner.id &&
+
           <BookingForm spot={spot}/>
+        }
       </div>
 
 

@@ -74,53 +74,71 @@ const SpotForm = ({update = false, spot, setShowModal}) => {
           <ErrorDisplay id={'spot-error-list'} errors={errors}/>
         </div>
       <input
-      className='first-field'
+        className='login-input first-field'
+        id='spot-name'
         type='text'
         placeholder='Name'
         value={name}
         onChange={updateName}/>
       <input
+        className='login-input'
+        id='spot-address'
         type='text'
         placeholder='Address'
         value={address}
         onChange={updateAddress}/>
       <input
+        className='login-input'
+        id='spot-city'
         type='text'
         placeholder='City'
         value={city}
         onChange={updateCity}/>
       <input
+        className='login-input'
+        id='spot-state'
         type='text'
         placeholder='State'
         value={state}
         onChange={updateState}/>
        <input
+        className='login-input'
+        id='spot-country'
         type='text'
         placeholder='Country'
         value={country}
         onChange={updateCountry}/>
        <textarea
+        className='login-input'
+        id='spot-description'
         type='textarea'
         placeholder='Description'
         value={description}
         onChange={updateDescription}/>
         <input
+        className='login-input'
+        id='spot-price'
         type='number'
         placeholder='Price'
         value={price}
         onChange={updatePrice}/>
         <input
+        className='login-input'
+        id='image-1'
         type='text'
         placeholder='Image 1'
         value={image1}
         onChange={updateImage1}/>
         <input
+        className='login-input'
+        id='image-2'
         type='text'
         placeholder='Image 2'
         value={image2}
         onChange={updateImage2}/>
         <input
-        className='last-field'
+        className='login-input last-field'
+        id='image-3'
         type='text'
         placeholder='Image 3'
         value={image3}

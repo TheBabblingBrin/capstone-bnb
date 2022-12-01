@@ -115,18 +115,6 @@ const SingleSpot = () =>{
             <ReservationCart spot={spot} spotrating={spotRating}/>
           </div>
         </div>
-          {/* <button
-          className='spot-button'
-          onClick={()=> deleteSpot()}
-          >
-            Delete
-          </button>
-          <h3>Update Spot</h3>
-          <SpotForm update={true}/> */}
-          {/* <h3>Reserve Spot</h3>
-          <BookingForm spotId={spotId}/> */}
-          {/* <h3>Leave a Review</h3>
-          <ReviewForm spotId={spotId}/> */}
           <ReviewIndex spot={spot} spotrating={spotRating} />
     </div>
     </div>

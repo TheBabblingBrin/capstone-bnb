@@ -62,6 +62,7 @@ input[type="radio"]{
   max-height: 70px;
   min-height: 70px;
   overflow: hidden;
+  cursor: pointer;
 }
 .review-listing-pic img{
   object-fit:fill;

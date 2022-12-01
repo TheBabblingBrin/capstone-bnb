@@ -4,6 +4,7 @@ from sqlalchemy.orm import joinedload
 from app.models import Spot, db, User, SpotImage
 from app.forms import SpotForm
 from .auth_routes import validation_errors_to_error_messages
+import re
 
 spot_routes = Blueprint('spots', __name__)
 
@@ -34,6 +35,20 @@ def create_spot():
 
   if form.validate_on_submit():
     images = request.json['images']
+    dateErrors = {}
+    count = 0
+    for i, image in enumerate(images):
+      if len(image) > 0:
+        count +=1
+    if count == 0:
+      dateErrors['Image'] = ['Please upload at least one image.']
+
+    for i, image in enumerate(images):
+      if re.match("^$|(?:http\:|https\:)?\/\/.*\.(?:png|jpg|jpeg)", image) == None:
+        dateErrors[f'Image {i+1}'] = ['Please use a valid image URL (https://ex.jpg/jpeg/png)']
+    if bool(dateErrors):
+      print('ERRRRRRRRRROS', dateErrors)
+      return {'errors': validation_errors_to_error_messages(dateErrors)}
 
     data = form.data
     new_spot = Spot(

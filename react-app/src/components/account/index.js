@@ -8,12 +8,14 @@ import ReviewCard from '../reviews/reviewcard';
 import { loadSpotsThunk } from '../../store/spots';
 import SpotCard from '../spots/spotsindex/spotcard';
 import SpotFormModal from '../spots/spotform';
+import BookingModal from '../bookings/bookingmodal/index';
 
 function AccountPage (){
    const dispatch = useDispatch();
    const user = useSelector(state => state.session.user)
    const userReviews = useSelector(state => state.reviews.allReviews)
    const spots = useSelector(state => state.spots.allSpots)
+   const bookings = useSelector(state => state.bookings.allBookings)
    let reviewList
    let spotsList
 
@@ -40,6 +42,8 @@ function AccountPage (){
         <div className='user-account-info'>
           <h1>Hi, {user.firstName}</h1>
           <span>Email: {user.email}</span>
+          <BookingModal />
+
         </div>
         <div className='account-profile-image'>
           <img src='https://res.cloudinary.com/degkakjou/image/upload/v1669764105/AirBnB/whiteclipart2562521_iu2nva.png'></img>

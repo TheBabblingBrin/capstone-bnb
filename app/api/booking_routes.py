@@ -13,9 +13,12 @@ def getAllBookings():
     """
     Query for all user and sends users bookings
     """
-    user = User.query.get(current_user.id).bookings
-    # return bookings.to_dict()
-    return {'bookings': [booking.to_dict() for booking in user]}
+    user_bookings = User.query.get(current_user.id).bookings
+    bookings = [booking.to_dict() for booking in user_bookings]
+    for booking in bookings:
+      spot = Spot.query.get(booking['spotId'])
+      booking['spot'] = spot.to_dict()
+    return {'bookings': bookings}
 
 ##GET booking
 @booking_routes.route('/<int:bookingId>', methods=['GET'])
@@ -30,7 +33,6 @@ def create_booking():
   spot = request.json['spotId']
   spotBookings = Spot.query.get_or_404(spot).to_dict()['bookings']
   spotBookings = [[date['start_date'],date['end_date']] for date in spotBookings]
-  print('BOOKINGSSSSSS', spotBookings)
   form = BookingForm()
   form['csrf_token'].data = request.cookies['csrf_token']
 
@@ -38,7 +40,7 @@ def create_booking():
     data = form.data
 
     dateErrors = {}
-    
+
     for date in spotBookings:
       if (data['start_date'] <= date[1].date()) and (date[0].date() <= data['end_date']):
         dateErrors['Date'] = ['These dates are already taken. Please try again.']
@@ -57,7 +59,10 @@ def create_booking():
         )
     db.session.add(new_booking)
     db.session.commit()
-    return {'booking': new_booking.to_dict()}
+    booking = new_booking.to_dict()
+    spot = Spot.query.get(booking['spotId'])
+    booking['spot'] = spot.to_dict()
+    return {'booking': booking}
   return {'errors': validation_errors_to_error_messages(form.errors)}
 
 ##UPDATE booking
@@ -77,7 +82,11 @@ def update_booking(bookingId):
       booking.end_date = data['end_date']
 
       db.session.commit()
-      return {'booking': booking.to_dict()}
+      newbooking = booking.to_dict()
+      spot = Spot.query.get(newbooking['spotId'])
+      newbooking['spot'] = spot.to_dict()
+      return {'booking': newbooking}
+
   return {'errors': validation_errors_to_error_messages(form.errors)}
 
 @booking_routes.route('/<int:bookingId>', methods=['DELETE'])

@@ -1,0 +1,82 @@
+.bookings-wrapper{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 20px;
+  height: fit-content;
+}
+.bookings-wrapper div{
+  display: flex;
+  width: 100%;
+}
+
+.booking-box-spot{
+  display: flex;
+  padding: unset;
+  width: 100%;
+}
+.booking-info{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+}
+.booking-info span{
+  font-size: 12px;
+}
+.booking-info h4{
+  margin: 10px 0 0 0;
+}
+
+.booking-info h6{
+  display: flex;
+  align-self: flex-start;
+  margin-bottom: 5px;
+}
+.booking-list{
+  display: flex;
+  flex-direction: column;
+  padding: unset;
+  width: 100%;
+}
+.single-booking-wrapper{
+  display: flex;
+  margin: 15px 0;
+  width: 100%;
+  overflow: hidden;
+  max-height: 350px;
+}
+.single-booking-wrapper button{
+  width: 80%;
+  padding: 4px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgb(229,29,84);
+  color: white;
+  font-size: 12px;
+  margin:10px 0;
+  cursor: pointer;
+}
+.single-booking-wrapper button:hover:active{
+  width: 75%;
+  padding: 2px;
+  background-color: #ff385c;
+  font-size: 8px;
+}
+
+.booking-index-button-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 150px;
+
+}
+.booking-index-button-container div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 50%;
+
+}

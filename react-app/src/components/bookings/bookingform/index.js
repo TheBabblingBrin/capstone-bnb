@@ -19,7 +19,7 @@ const formatDate = (date) => {
 
   return [year, month, day].join('-');
 }
-const BookingForm = ({update = false, booking, spot}) => {
+const BookingForm = ({update = false, booking, spot,setShowForm}) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const currbooking = useSelector(state => state.bookings[booking?.id])
@@ -77,6 +77,7 @@ const BookingForm = ({update = false, booking, spot}) => {
       return
     }
     if(newbooking){
+      setShowForm(false)
       // dispatch(loadBookingsThunk())
       // history.push(`/bookings/${newbooking.booking.id}`)
     }
@@ -84,8 +85,8 @@ const BookingForm = ({update = false, booking, spot}) => {
 
 
   return(
-    <div>
-    <form className='booking-form' onSubmit={handleSubmit}>
+    <div className={update? 'booking-form-wrapper manage': 'booking-form-wrapper'}>
+    <form className={update? 'booking-form manage': 'booking-form'} onSubmit={handleSubmit}>
       <div className='signup-error-list'>
           <ErrorDisplay id={'booking-error-list'} errors={errors}/>
         </div>
@@ -126,6 +127,7 @@ const BookingForm = ({update = false, booking, spot}) => {
     {endDate && startDate &&
 
     <div className='cart-bottom'>
+      {!update &&
         <div className='cart-calc'>
           <div>
             <span>${spot.price}x{nights}</span>
@@ -140,6 +142,7 @@ const BookingForm = ({update = false, booking, spot}) => {
             <span>${parseInt((spot.price * nights)*.14)}</span>
           </div>
         </div>
+      }
         <div className='cart-total'>
           <span>Total before taxes</span>
           <span>${parseInt((spot.price * nights)*.14) + spot.price * nights + parseInt(spot.price/nights)}</span>

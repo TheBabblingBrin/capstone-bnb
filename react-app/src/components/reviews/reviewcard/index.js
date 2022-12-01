@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import { useSelector, useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getReviewThunk, loadReviewsThunk, removeReviewThunk, updateReviewThunk } from '../../../store/reviews';
-import { loadSpotsThunk } from '../../../store/spots';
+import { getSpotThunk, loadSpotsThunk } from '../../../store/spots';
 import ReviewForm from '../reviewform';
 import '.././index.css'
 
@@ -23,8 +23,10 @@ const ReviewCard = ({review, manage=false}) =>{
   const deleteReview =async (id)=>{
     let success = await dispatch(removeReviewThunk(id))
     if(success){
+      dispatch(getSpotThunk(review.spot.id))
       dispatch(loadReviewsThunk())
       dispatch(loadSpotsThunk())
+
 
     }
   }
@@ -40,7 +42,7 @@ const ReviewCard = ({review, manage=false}) =>{
         </div>}
         {manage &&
           <div className='review-listing-pic'>
-            <img src={review.spot?.images[0].url}></img>
+            <img src={review.spot?.images[0].url} onClick={()=>history.push(`/spots/${review.spot.id}`)}></img>
            </div>}
       {!manage &&
         <div className='reviewer-info'>
@@ -63,7 +65,7 @@ const ReviewCard = ({review, manage=false}) =>{
               ><i class="fa-solid fa-trash"></i></button>
             </div>
             </div>
-            <span>Reviewed on {review.updatedAt.split(' ')[0].slice(1)}</span>
+            <span>Reviewed on {review.updatedAt?.split(' ')[0].slice(1)}</span>
           </div>
         }
       </div>
