@@ -11,10 +11,16 @@ const ReservationCart = ({spot,spotrating}) =>{
   const dispatch = useDispatch()
   const history = useHistory()
   const [showPrice, setShowPrice] = useState(false)
+  const [owned, setOwned] = useState(false)
   const user = useSelector(state => state.session.user)
 
 
   useEffect(()=>{
+    if(user){
+      if(user.id !== spot.owner.id){
+        setOwned(true)
+      }
+    }
 
   },[dispatch])
 
@@ -33,7 +39,7 @@ const ReservationCart = ({spot,spotrating}) =>{
             <span>{spot.reviews.length} reviews</span>
           </div>
         </div>
-        {user.id !== spot.owner.id &&
+        {!owned &&
 
           <BookingForm spot={spot}/>
         }

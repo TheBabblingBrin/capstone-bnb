@@ -20,6 +20,10 @@ const ReviewIndex = ({spot, spotrating}) =>{
   },[dispatch])
 
   useEffect(()=>{
+    if(!user){
+      setLeftReview(true)
+      return
+    }
     for(let rev of Object.values(reviews)){
       if(rev.reviewer.id == user.id){
         setLeftReview(true)
