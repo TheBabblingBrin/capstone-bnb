@@ -23,6 +23,7 @@ input[type="radio"]{
 
 .review-meta{
   display: flex;
+  font-size: 14px;
 }
 
 .review-meta h4{
@@ -50,7 +51,25 @@ input[type="radio"]{
   justify-self: center;
   margin: 10px 0 0 0;
 }
-
+.review-listing-pic{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px transparent solid;
+  border-radius: 8px;
+  max-width: 70px;
+  min-width: 70px;
+  max-height: 70px;
+  min-height: 70px;
+  overflow: hidden;
+}
+.review-listing-pic img{
+  object-fit:fill;
+  max-width: 70px;
+  min-width: 70px;
+  max-height: 70px;
+  min-height: 70px;
+}
 .review-profile-pic{
   display: flex;
   align-items: center;
@@ -97,10 +116,9 @@ input[type="radio"]{
 }
 
 .word-counter{
-  position: absolute;
-  right:39px;
-  top:120px;
-
+  position: relative;
+  bottom: 20px;
+  left: 85%;
   font-size: 12px;
   color: rgba(211, 211, 211, 1);
 }

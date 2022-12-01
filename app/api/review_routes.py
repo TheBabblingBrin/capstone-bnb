@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import Review, db, User
+from app.models import Review, db, User, Spot
 from app.forms import ReviewForm
 from .auth_routes import validation_errors_to_error_messages
 
@@ -12,9 +12,13 @@ def getAllReviews():
     """
     Query for all user and sends users reviews
     """
-    user = User.query.get(current_user.id).reviews
+    user_reviews = User.query.get(current_user.id).reviews
+    reviews = [review.to_dict() for review in user_reviews]
+    for review in reviews:
+      spot = Spot.query.get(review['spotId'])
+      review['spot'] = spot.to_dict()
     # return reviews.to_dict()
-    return {'reviews': [review.to_dict() for review in user]}
+    return {'reviews': reviews}
 
 ##GET review
 @review_routes.route('/<int:reviewId>', methods=['GET'])
@@ -59,7 +63,10 @@ def update_review(reviewId):
       review.rating = data['rating']
 
       db.session.commit()
-      return {'review': review.to_dict()}
+      review = review.to_dict()
+      spot = Spot.query.get(review['spotId'])
+      review['spot'] = spot.to_dict()
+      return {'review': review}
   return {'errors': validation_errors_to_error_messages(form.errors)}
 
 @review_routes.route('/<int:reviewId>', methods=['DELETE'])

@@ -7,6 +7,7 @@ import { authenticate } from './store/session';
 import SpotIndex from './components/spots/spotsindex';
 import SpotForm from './components/spots/spotform';
 import SingleSpot from './components/spots/singleSpot';
+import AccountPage from './components/account';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -28,9 +29,11 @@ function App() {
       <NavBar />
       <Switch>
         <Route path='/' exact={true} >
-          {/* <SpotForm /> */}
           <SpotIndex />
         </Route>
+        <ProtectedRoute path='/user'>
+            <AccountPage />
+        </ProtectedRoute>
         <Route path='/spots/:spotId'>
           <SingleSpot />
         </Route>

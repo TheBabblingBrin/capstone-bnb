@@ -7,7 +7,7 @@ import { getSpotThunk, loadSpotsThunk } from '../../../store/spots';
 import StarHovering from './stars';
 
 
-const ReviewForm = ({update = false, review, spotId, setShowModal}) => {
+const ReviewForm = ({update = false, review, spotId, setShowModal, setShowForm}) => {
   const dispatch = useDispatch()
   const history = useHistory()
   // const currReview = useSelector(state => state.reviews[review?.id])
@@ -19,7 +19,6 @@ const ReviewForm = ({update = false, review, spotId, setShowModal}) => {
 
   const updateBody = (e) => setBody(e.target.value);
   const updateRating = (e) => setRating(e.target.value);
-
   useEffect(()=>{
     dispatch(loadReviewsThunk())
 
@@ -48,6 +47,9 @@ const ReviewForm = ({update = false, review, spotId, setShowModal}) => {
       if(setShowModal){
         setShowModal(false)
       }
+      if(setShowForm){
+        setShowForm(false)
+      }
       // history.push(`/Reviews/${newReview.Review.id}`)
     }
   }
@@ -66,7 +68,7 @@ const ReviewForm = ({update = false, review, spotId, setShowModal}) => {
             placeholder='Enter your experiences here.'
             className='review-textarea'
             />
-            <div className='word-counter'>{500 - body.length > 0 ? 500 - body.length : 0}/500</div>
+            <div className='word-counter'>{500 - body?.length > 0 ? 500 - body?.length : 0}/500</div>
          </div>
 
         <StarHovering stars={rating} setRating={setRating}/>

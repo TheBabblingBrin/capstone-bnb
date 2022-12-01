@@ -72,7 +72,7 @@ export const addReviewThunk = (review) => async (dispatch) =>{
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(review),
   })
-  
+
   if(response.ok){
     const data = await response.json();
     await dispatch(addReview(data))
@@ -99,6 +99,7 @@ export const updateReviewThunk = (review, id) => async (dispatch) =>{
   if(response.ok){
     const data = await response.json();
     dispatch(addReview(data.review))
+    console.log(data, '+++++++++++++++++++++++++++')
     return data;
   }else if (response.status < 500) {
     const data = await response.json();
@@ -117,8 +118,9 @@ export const removeReviewThunk = (reviewId) => async (dispatch) =>{
   })
 
   if(response.ok){
+    const data = await response.json();
     dispatch(removeReview(reviewId))
-    return;
+    return data;
   }else if (response.status < 500) {
     const data = await response.json();
     if (data.errors) {

@@ -1,0 +1,119 @@
+
+.account-items-wrapper{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  width: 100%;
+}
+.account-item-container{
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  min-width:100%;
+  max-width:100%;
+  min-height: 600px;
+}
+
+.account-spots{
+  border-right:1px solid rgba(211, 211, 211, .6);
+}
+
+.account-reviews-list{
+  position: relative;
+  top: 50px;
+  margin: 10px 10px;
+  max-width: 100%;
+}
+.account-reviews-list h6{
+  margin-bottom: 10px;
+}
+.single-review-wrapper.management{
+  margin: 10px 0 10px 0;
+  max-width: 500px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(211, 211, 211, .6);
+}
+.single-review-wrapper.management p{
+  max-width: 500px;
+
+}
+.reviewer-info.management{
+  display: flex;
+
+}
+.reviewer-info.management span{
+  font-size: 12px;
+  margin: 4px 10px;
+}
+.account-item-container h3{
+  position: absolute;
+  align-self: center;
+  text-align: center;
+
+
+
+}
+.account-profile-image{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  border: 1px transparent solid;
+  border-radius: 99px;
+  max-width: 88px;
+  min-width: 88px;
+  max-height: 88px;
+  min-height: 88px;
+  background-color: rgb(255,92,98);
+  margin-top: 10px;
+}
+
+.account-profile-image img{
+  object-fit:fill;
+  max-width: 60px;
+  min-width: 60px;
+  max-height: 60px;
+  min-height: 60px;
+  margin-top: -2px;
+}
+
+.account-page-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 70px;
+  margin: 16px 0 40px 0;
+  width: 100vw;
+  padding: 0 50px;
+}
+.account-page-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 70px;
+  margin: 16px 0 40px 0;
+  max-width: 1220px;
+  min-width: 1000px;
+}
+
+.user-meta-data{
+  display:flex;
+  justify-content: space-between;
+  width: 80%;
+  padding: 30px 40px 20px 20px;
+  max-width: 1220px;
+  min-width: 1000px;
+  border-bottom: 1px solid rgba(211, 211, 211, .6);
+}
+
+.user-meta-data h1{
+  margin-bottom: 10px;
+}
+
+.user-meta-data span{
+  color:rgb(123, 123, 123);
+  font-size: 14px;
+}
