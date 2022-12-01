@@ -2,6 +2,7 @@ import {useEffect} from 'react'
 import { useSelector, useDispatch} from 'react-redux';
 import { useParams} from "react-router-dom";
 import { getSpotThunk } from '../../../store/spots';
+import NotFound from '../../auth/notfound';
 import ReviewIndex from '../../reviews/reviewindex';
 import './index.css'
 import ReservationCart from './spotReservationCart';
@@ -18,7 +19,7 @@ const SingleSpot = () =>{
   dispatch(getSpotThunk(spotId))
   },[spots, dispatch, spotId])
 
-  if(!spot ) return <h1>Loading...</h1>
+  if(!spot ) return <NotFound />
 
   let spotRating;
   let ratingArr = spot.avg_rating.toString().split('');

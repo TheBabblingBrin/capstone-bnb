@@ -7,6 +7,8 @@ import { authenticate } from './store/session';
 import SpotIndex from './components/spots/spotsindex';
 import SingleSpot from './components/spots/singleSpot';
 import AccountPage from './components/account';
+import FooterBar from './components/navigation/footer';
+import NotFound from './components/auth/notfound'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -36,7 +38,9 @@ function App() {
         <Route path='/spots/:spotId'>
           <SingleSpot />
         </Route>
+        <Route path='*' component={NotFound} />
       </Switch>
+      <FooterBar />
     </BrowserRouter>
   );
 }
