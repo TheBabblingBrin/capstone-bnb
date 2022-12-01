@@ -5,7 +5,6 @@ import ErrorDisplay from '../../auth/ErrorDisplay'
 import {loadBookingsThunk, updateBookingThunk, addBookingThunk} from '../../../store/bookings'
 import './index.css'
 import LoginFormModal from '../../auth/User/LoginFormModal';
-import { check } from 'express-validator';
 const formatDate = (date) => {
   let d = new Date(date),
       month = '' + (d.getMonth() + 1),
@@ -58,26 +57,28 @@ const BookingForm = ({update = false, booking, spot,setShowForm}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrors([])
+    //  setErrors([])
 
-    const dateErrors = checkDates()
-    if(errors.length >0 || dateErrors.length > 0)return
+     const dateErrors =  await checkDates()
+     if(dateErrors.length > 0)return
 
-    const payload = {
+    let payload = {
       spotId:spot.id,
       start_date: startDate,
       end_date: endDate
 
     };
     let newbooking = !update? await dispatch(addBookingThunk(payload)): await dispatch(updateBookingThunk(payload,booking?.id))
-    console.log(newbooking)
     if(newbooking.errors){
 
       setErrors(newbooking.errors)
       return
     }
     if(newbooking){
-      setShowForm(false)
+      alert('Enjoy your vacation!')
+      if(setShowForm){
+        setShowForm(false)
+      }
       // dispatch(loadBookingsThunk())
       // history.push(`/bookings/${newbooking.booking.id}`)
     }

@@ -9,7 +9,16 @@ function UserMenu({setShowMenu}) {
   const dispatch = useDispatch()
   const user = useSelector(state => state.session.user)
   const history = useHistory()
+  const goToUser = () =>{
+    setShowMenu(false)
+    history.push('/user')
+  }
 
+  const logOut = () =>{
+    dispatch(logout())
+    setShowMenu(false)
+
+  }
   return (
       <div className='user-menu' >
       {!user &&
@@ -24,12 +33,12 @@ function UserMenu({setShowMenu}) {
       <>
         <button
           className="user-menu-button"
-          onClick={() => history.push('/user')}>
+          onClick={() => goToUser()}>
             Account
           </button>
         <button
           className='user-menu-button'
-          onClick={()=> dispatch(logout())}
+          onClick={()=> logOut() }
         >Log Out</button>
       </>
       }
