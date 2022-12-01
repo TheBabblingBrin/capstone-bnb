@@ -21,7 +21,11 @@ if(menu && profile){
   }
 }
 },[])
-
+  const demoLogin = (e) => {
+    setCredential('demo@aa.io')
+    setPassword('password')
+  }
+  
   const handleSubmit = async (e) => {
 
     e.preventDefault();
@@ -64,6 +68,9 @@ if(menu && profile){
         </div>
         <div className='login-button-wrapper'>
           <button type="submit" className="login-button">Log In</button>
+        </div>
+        <div className='login-button-wrapper'>
+          <button className="login-button" onClick={(e)=> demoLogin(e)}>Demo</button>
         </div>
     </form>
     </div>
