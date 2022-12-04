@@ -100,6 +100,9 @@ export const updateSpotThunk = (spot, id) => async (dispatch) =>{
 
   if(response.ok){
     const data = await response.json();
+    if (data.errors) {
+      return data;
+    }
     dispatch(addSpot(data.spot))
     return data;
   }else if (response.status < 500) {

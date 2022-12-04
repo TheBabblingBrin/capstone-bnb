@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import ErrorDisplay from '../../auth/ErrorDisplay'
 import {loadBookingsThunk, updateBookingThunk, addBookingThunk} from '../../../store/bookings'
 import './index.css'
@@ -19,6 +20,7 @@ const formatDate = (date) => {
 }
 const BookingForm = ({update = false, booking, spot,setShowForm}) => {
   const dispatch = useDispatch()
+  const history = useHistory()
   const user = useSelector(state => state.session.user)
   const [startDate, setStartDate] = useState(update? formatDate(booking?.start_date):null)
   const [endDate, setEndDate] = useState(update? formatDate(booking?.end_date):null)
@@ -71,12 +73,17 @@ const BookingForm = ({update = false, booking, spot,setShowForm}) => {
       return
     }
     if(newbooking){
-      alert('Enjoy your vacation!')
+      history.push('/user')
+      setTimeout(()=>{
+        let trips = document.querySelector('.bookings-button')
+        if(trips){
+          trips.click()
+        }
+      },200)
       if(setShowForm){
         setShowForm(false)
       }
-      // dispatch(loadBookingsThunk())
-      // history.push(`/bookings/${newbooking.booking.id}`)
+
     }
   }
 

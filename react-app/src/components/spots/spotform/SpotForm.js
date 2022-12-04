@@ -54,7 +54,7 @@ const SpotForm = ({update = false, spot, setShowModal}) => {
       price,
       images
     };
-    let newspot = !update? await dispatch(addSpotThunk(payload)): await dispatch(updateSpotThunk(payload,spot?.id))
+    let newspot = !update? await dispatch(addSpotThunk(payload)): await dispatch(updateSpotThunk(payload, spot?.id))
     if(newspot.errors){
       setErrors(newspot.errors)
       return

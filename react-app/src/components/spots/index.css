@@ -69,6 +69,7 @@
   max-width: 30px;
   margin: 0px 10px;
   opacity: 0;
+  pointer-events: auto;
 }
 .slideshow-button:hover{
   opacity: 1 !important;
@@ -84,6 +85,7 @@
   top:-165px;
   min-width: 312px;
   max-width: 312px;
+  pointer-events: none;
 }
 
 .spot-card-wrapper:hover .slideshow-button{

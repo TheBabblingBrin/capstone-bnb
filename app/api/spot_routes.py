@@ -82,6 +82,21 @@ def update_spot(spotId):
   if spot.ownerId != current_user.id:
     return{{'errors': 'You must own a spot to update it.'}}
   if form.validate_on_submit():
+      images = request.json['images']
+      dateErrors = {}
+      count = 0
+      for i, image in enumerate(images):
+        if len(image) > 0:
+          count +=1
+      if count == 0:
+        dateErrors['Image'] = ['Please upload at least one image.']
+
+      for i, image in enumerate(images):
+        if re.match("^$|(?:http\:|https\:)?\/\/.*\.(?:png|jpg|jpeg)", image) == None:
+          dateErrors[f'Image {i+1}'] = ['Please use a valid image URL (https://ex.jpg/jpeg/png)']
+      if bool(dateErrors):
+        return {'errors': validation_errors_to_error_messages(dateErrors)}
+        
       data = form.data
       spot.name = data['name']
       spot.address = data['address']

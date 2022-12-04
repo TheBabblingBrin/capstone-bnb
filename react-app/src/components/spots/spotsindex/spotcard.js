@@ -99,11 +99,12 @@ const SpotCard = ({spot, manage=false}) =>{
           onClick={()=>goPrev()}>
           <div>&#10094;</div>
           </div>
-
+        {spot?.images?.length >= 2 &&
           <div className='slideshow-button next' id={`next${spot.id}`}
           onClick={()=>goNext()}>
           <div>&#10095;</div>
           </div>
+        }
 
 
         </div>
