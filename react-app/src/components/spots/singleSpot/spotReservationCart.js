@@ -13,13 +13,13 @@ const ReservationCart = ({spot,spotrating}) =>{
 
 
   useEffect(()=>{
+    setOwned(false)
     if(user){
       if(user.id === spot.owner.id){
         setOwned(true)
-      }
-      }else{
-        setOwned(false)
-      }
+      }}
+
+
   },[dispatch, user, spot.owner.id])
 
   return(

@@ -23,7 +23,10 @@ const SingleSpot = () =>{
 
   let spotRating;
   let ratingArr = spot.avg_rating.toString().split('');
-
+  let miniImages = spot.images.slice(1)
+  while(miniImages.length <3){
+    miniImages.push({url: 'https://res.cloudinary.com/degkakjou/image/upload/v1669254001/AirBnB/xn8sI0i_rvsdw7.jpg'})
+  }
    if(spot.avg_rating === 0) spotRating = null;
    else if(Number.isInteger(spot.avg_rating)) spotRating = `${spot.avg_rating}.0`;
    else if(ratingArr.slice(2).length === 1) spotRating = spot.avg_rating;
@@ -53,7 +56,7 @@ const SingleSpot = () =>{
             <img alt='' src={spot.images[0].url}></img>
           </div>
           <div className='single-spot-mini-image-wrapper'>
-            {spot.images.slice(1).map(image =>
+            {miniImages.map(image =>
               <img alt='' src={image.url}></img>
               )}
           </div>
