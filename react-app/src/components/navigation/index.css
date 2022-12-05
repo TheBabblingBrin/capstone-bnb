@@ -30,7 +30,7 @@
 
 .logo-button-container{
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   min-height: 60px;
   max-height: 60px;
@@ -47,29 +47,27 @@
 .footer-abnd-logo{
 height: 22px;
  opacity: .8;
- padding-left: 100px;
+ margin-right: 20px;
 }
 .dev-meta-data{
-  /* position: relative; */
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
   min-height: 60px;
   max-height: 60px;
-  /* min-width: 46px;
-  max-width: 118px; */
+  max-width: 168px;
   width:20%;
 
 }
+
+.dev-meta-data input{
+  margin-left: 20px;
+}
 .github-logo{
-  /* position: absolute;
-  left: -200px; */
   height: 18px;
   opacity: .8;
  }
  .in-logo{
-  /* position: absolute;
-  left: -200px; */
   height: 18px;
   opacity: .8;
  }
