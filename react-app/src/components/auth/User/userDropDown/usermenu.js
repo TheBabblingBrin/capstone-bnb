@@ -4,7 +4,7 @@ import './index.css'
 import LoginFormModal from '../LoginFormModal';
 import {logout} from '../../../../store/session'
 
-function UserMenu({setShowMenu}) {
+function UserMenu({setShowMenu, showMenu, closeOpenMenus}) {
   const dispatch = useDispatch()
   const user = useSelector(state => state.session.user)
   const history = useHistory()
@@ -14,16 +14,16 @@ function UserMenu({setShowMenu}) {
   }
 
   const logOut = () =>{
-    dispatch(logout())
     setShowMenu(false)
+    dispatch(logout())
 
   }
   return (
       <div className='user-menu' >
       {!user &&
       <>
-        <LoginFormModal />
-        <LoginFormModal location={'Sign up'}/>
+        <LoginFormModal closeOpenMenus={closeOpenMenus} setShowMenu={setShowMenu} showMenu={showMenu}/>
+        <LoginFormModal closeOpenMenus={closeOpenMenus} location={'Sign up'} setShowMenu={setShowMenu} showMenu={showMenu}/>
 
       </>
       }

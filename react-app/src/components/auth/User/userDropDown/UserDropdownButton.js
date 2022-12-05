@@ -1,10 +1,20 @@
-import React, { useState,useRef } from 'react';
+import React, { useState,useRef, useEffect } from 'react';
 import UserMenu from './usermenu';
 
 function UserDropdownButton() {
   const [showMenu, setShowMenu] = useState(false);
   const userMenu = useRef(null)
 
+  const closeOpenMenus = (e)=>{
+    if(userMenu.current && showMenu && !userMenu.current.contains(e.target)){
+      setShowMenu(false)
+    }
+}
+
+  useEffect(() => {
+    document.addEventListener('click', closeOpenMenus);
+    return () => document.removeEventListener("click", closeOpenMenus);
+  }, [showMenu, closeOpenMenus]);
 
 
 
@@ -19,7 +29,7 @@ function UserDropdownButton() {
           </div>
         </button>
       {showMenu &&(
-        <UserMenu setShowMenu={setShowMenu}/>
+        <UserMenu setShowMenu={setShowMenu} closeOpenMenus={closeOpenMenus} showMenu={showMenu}/>
       )
       }
     </div>

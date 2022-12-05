@@ -4,12 +4,18 @@ import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
 
 
-function LoginFormModal({location = null}) {
+function LoginFormModal({closeOpenMenus, location = null, setShowMenu, showMenu}) {
   const [showModal, setShowModal] = useState(false);
-
+  const showThings = () => {
+    document.removeEventListener("click", closeOpenMenus)
+    setShowModal(true)
+  }
   return (
     <div className={location==='Reserve'? 'booking-button-wrapper':'modal-box'}>
-      <button className={location==='Reserve'? 'create-booking-submit':'user-menu-button'} onClick={() => setShowModal(true)}>{location? location:'Login'}</button>
+      <button className={location==='Reserve'? 'create-booking-submit':'user-menu-button'}
+      onClick={() => showThings()}>
+        {location? location:'Login'}
+      </button>
       {showModal && !location &&(
         <Modal onClose={() => setShowModal(false)}>
           <LoginForm />
