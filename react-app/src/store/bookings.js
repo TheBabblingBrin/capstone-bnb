@@ -33,7 +33,6 @@ const removeBooking = (booking) => ({
 //THUNKS
 export const loadBookingsThunk = ()=> async (dispatch) => {
   const response  = await fetch('/api/bookings')
-
   if(response.ok){
     const data = await response.json();
     dispatch(loadBookings(data))

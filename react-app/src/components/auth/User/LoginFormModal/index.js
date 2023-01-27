@@ -10,6 +10,8 @@ function LoginFormModal({closeOpenMenus, location = null, setShowMenu, showMenu}
     document.removeEventListener("click", closeOpenMenus)
     setShowModal(true)
   }
+
+  
   return (
     <div className={location==='Reserve'? 'booking-button-wrapper':'modal-box'}>
       <button className={location==='Reserve'? 'create-booking-submit':'user-menu-button'}

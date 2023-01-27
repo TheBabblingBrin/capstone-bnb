@@ -17,16 +17,16 @@ class User(db.Model, UserMixin):
 
     bookings = db.relationship('Booking',
                             back_populates = 'reservations',
-                            lazy=False,
+                            lazy='select',
                             cascade="all, delete")
 
     reviews = db.relationship('Review',
                             back_populates = 'reviewer',
-                            lazy=False,
+                            lazy='select',
                             cascade="all, delete")
     listings = db.relationship('Spot',
                             back_populates = 'owners',
-                            lazy=False,
+                            lazy='select',
                             cascade="all, delete")
 
     @property
